@@ -12,6 +12,7 @@ public class Startup {
 		if (null == gameObject) {
 			Debug.Log("EditorStartup:gameObject 'Main Camera' must not be null!");
 		}
+		// TODO if have component remove component
 		gameObject.AddComponent<Main2>();
 		Debug.Log("EditorStartup:Linking done!");
 	}

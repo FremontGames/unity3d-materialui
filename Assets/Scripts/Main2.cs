@@ -3,12 +3,18 @@ using System.Collections;
 
 public class Main2 : MonoBehaviour {
 
+	GameObject gameObject;
 	GameObject sphere;
 
 	// Use this for initialization
 	void Start () {
 		Debug.Log("Main:Started!");
 		sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+		gameObject = GameObject.Find("Main Camera");
+		if (null == gameObject) {
+			Debug.Log("EditorStartup:gameObject 'Main Camera' must not be null!");
+		}
+		gameObject.AddComponent<UICreator>();
 	}
 	
 	// Update is called once per frame
