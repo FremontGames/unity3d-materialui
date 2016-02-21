@@ -10,4 +10,4 @@ obj
 *.csproj
 *.exe
 *.pdb
-app_Data
+*_Data
