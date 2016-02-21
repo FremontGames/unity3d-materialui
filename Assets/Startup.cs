@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
+/*
 using UnityEditor;
 
 [InitializeOnLoad]
+*/
 public class Startup {
 	static Startup()
 	{
-		Debug.Log("----------------------------");
+/*		Debug.Log("----------------------------");
 		Debug.Log("EditorStartup:Up and running");
 		GameObject gameObject = GameObject.Find("Main Camera");
 		if (null == gameObject) {
@@ -16,5 +18,6 @@ public class Startup {
 			Debug.Log("EditorStartup:setting Main script!");
 			gameObject.AddComponent<Main2> ();
 		}
+*/
 	}
 }

@@ -15,15 +15,16 @@ public class UICreator : MonoBehaviour {
 
 	void Start () {
 		CreateUI();
-
-//		GameObject termsAndConditionCanvas = (GameObject)Instantiate(Resources.Load("DialogCanvas"));
-//		termsAndConditionCanvas.transform.SetParent(this.transform);
+/*
+		GameObject termsAndConditionCanvas = (GameObject)Instantiate(Resources.Load("DialogCanvas"));
+		termsAndConditionCanvas.transform.SetParent(this.transform);
 		GameObject decline = (GameObject)GameObject.Find("Yes");
 		Button declineButton = decline.GetComponent<Button>();
 		declineButton.onClick.AddListener(delegate{OnYesClicked();});
 		GameObject accept = (GameObject)GameObject.Find("No");
 		Button acceptButton = (Button)accept.GetComponent<Button>();
 		acceptButton.onClick.AddListener(delegate{OnNoClicked();});
+*/
 	}
 
 	void OnYesClicked()

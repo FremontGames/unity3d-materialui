@@ -8,3 +8,6 @@ ProjectSettings
 builds
 obj
 *.csproj
+*.exe
+*.pdb
+app_Data
