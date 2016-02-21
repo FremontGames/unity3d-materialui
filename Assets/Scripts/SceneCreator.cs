@@ -9,7 +9,10 @@ public class SceneCreator : MonoBehaviour
 	{
 		sphere = GameObject.CreatePrimitive (PrimitiveType.Sphere);	
 
-		// Destroy(sphere);
+		GameObject cam = GameObject.Find("Main Camera");
+		cam.transform.LookAt(sphere.transform);
 
+
+		// Destroy(sphere);
 	}
 }
