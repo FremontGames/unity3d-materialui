@@ -4,17 +4,17 @@ using System.Collections;
 public class Main2 : MonoBehaviour {
 
 	GameObject gameObject;
-	GameObject sphere;
 
 	// Use this for initialization
 	void Start () {
 		Debug.Log("Main:Started!");
-		sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 		gameObject = GameObject.Find("Main Camera");
 		if (null == gameObject) {
 			Debug.Log("EditorStartup:gameObject 'Main Camera' must not be null!");
 		}
 		gameObject.AddComponent<UICreator>();
+		gameObject.AddComponent<PauseManager>();
+		gameObject.AddComponent<SceneCreator>();
 	}
 	
 	// Update is called once per frame
@@ -24,6 +24,5 @@ public class Main2 : MonoBehaviour {
 
 	void OnApplicationQuit() {
 		Debug.Log("Main:Application ending after " + Time.time + " seconds");
-		Destroy(sphere);
 	}
 }
