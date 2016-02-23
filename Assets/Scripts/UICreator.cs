@@ -13,6 +13,10 @@ public class UICreator : MonoBehaviour {
 
 	private const int LayerUI = 5;
 
+	void OnGUI() {
+		GUI.backgroundColor = Color.yellow;
+		GUI.Button(new Rect(10, 10, 70, 30), "A button");
+	}
 	void Start () {
 		CreateUI();
 /*
@@ -111,8 +115,9 @@ public class UICreator : MonoBehaviour {
 		trans.localPosition = new Vector3(0, 0, 0);
 		trans.sizeDelta = new Vector2(0, 0);
 		trans.localScale = new Vector3(0.8f, 0.8f, 1.0f);
-
+		/* NEVER USED
 		CanvasRenderer renderer = panelObject.AddComponent<CanvasRenderer>();
+		*/
 /*
 		Image image = panelObject.AddComponent<Image>();
 		Texture2D tex = Resources.Load<Texture2D>("panel_bkg");
@@ -164,11 +169,12 @@ public class UICreator : MonoBehaviour {
 		trans.anchoredPosition = new Vector2(x, y);
 		trans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 		trans.localPosition.Set(0, 0, 0);
-
+		/* NEVER USED
 		CanvasRenderer renderer = buttonObject.AddComponent<CanvasRenderer>();
 
 		Image image = buttonObject.AddComponent<Image>();
-/*
+		*/
+/* BUG
 		Texture2D tex = Resources.Load<Texture2D>("button_bkg");
 		image.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height),
 			new Vector2(0.5f, 0.5f));
