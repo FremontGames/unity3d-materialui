@@ -11,3 +11,4 @@ obj
 *.exe
 *.pdb
 *_Data
+*.suo
