@@ -11,17 +11,22 @@ using UnityEngine.Events;
  */
 public class UICreator : MonoBehaviour {
 
-    public int toolbarInt = 0;
-    public string[] toolbarStrings = new string[] {"Toolbar1", "Toolbar2", "Toolbar3"};
-    void OnGUI() {
+	int fontSize;
+
+	void OnGUI() {
+		// STYLE
+		GUIStyle style = GUI.skin.GetStyle ("button");
+		style.fontSize = fontSize;
+		// UI
         GUILayout.BeginHorizontal();
-	      if (GUILayout.Button("Play"))
+		if (GUILayout.Button("Play"))
 	        play();
-	      if (GUILayout.Button("Cancel"))
+		if (GUILayout.Button("Cancel"))
 	        cancel();
-	      if (GUILayout.Button("Exit"))
+		if (GUILayout.Button("Exit"))
 	        exit();
         GUILayout.EndHorizontal();
+		Debug.Log(fontSize);
 	}
 
 	private void Update () {
@@ -32,7 +37,18 @@ public class UICreator : MonoBehaviour {
 		Debug.Log("UI:play");
 	}
 
-
+	private void Start() {
+		// OS
+		if (Application.platform == RuntimePlatform.WindowsPlayer) {
+			Debug.Log("setting for Desktop");
+			fontSize = Screen.width / 40;
+		}
+		// MOBILE
+		else {
+			Debug.Log("setting for Mobile");
+			fontSize = Screen.width / 20;
+		}
+	}
 
 	private void exit()	{
 		Debug.Log("UI:exit");
