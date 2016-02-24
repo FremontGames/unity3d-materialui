@@ -15,9 +15,11 @@ public class UICreator : MonoBehaviour {
 
 	void OnGUI() {
 		// STYLE
+		// http://docs.unity3d.com/Manual/gui-Customization.html
 		GUIStyle style = GUI.skin.GetStyle ("button");
 		style.fontSize = fontSize;
 		// UI
+		// http://docs.unity3d.com/ScriptReference/GUILayout.BeginArea.html
         GUILayout.BeginHorizontal();
 		if (GUILayout.Button("Play"))
 	        play();
@@ -26,7 +28,7 @@ public class UICreator : MonoBehaviour {
 		if (GUILayout.Button("Exit"))
 	        exit();
         GUILayout.EndHorizontal();
-		Debug.Log(fontSize);
+		// TODO anchors
 	}
 
 	private void Update () {
@@ -38,6 +40,7 @@ public class UICreator : MonoBehaviour {
 	}
 
 	private void Start() {
+		// http://docs.unity3d.com/ScriptReference/Application-platform.html
 		// OS
 		if (Application.platform == RuntimePlatform.WindowsPlayer) {
 			Debug.Log("setting for Desktop");
