@@ -20,14 +20,24 @@ public class UICreator : MonoBehaviour {
 		style.fontSize = fontSize;
 		// UI
 		// http://docs.unity3d.com/ScriptReference/GUILayout.BeginArea.html
-        GUILayout.BeginHorizontal();
+		GUILayout.BeginHorizontal();
 		if (GUILayout.Button("Play"))
 	        play();
 		if (GUILayout.Button("Cancel"))
 	        cancel();
-		if (GUILayout.Button("Exit"))
+			if (GUILayout.Button("Exit"))
 	        exit();
         GUILayout.EndHorizontal();
+
+		// BAR
+		// http://docs.unity3d.com/ScriptReference/GUILayout.FlexibleSpace.html
+		GUILayout.BeginArea(new Rect(10, Screen.height/2, Screen.width-(10*2), 60));
+		GUILayout.BeginHorizontal();
+			GUILayout.Button("LEFT");
+			GUILayout.FlexibleSpace();
+			GUILayout.Button("RIGHT");
+		GUILayout.EndHorizontal();
+		GUILayout.EndArea();
 		// TODO anchors
 		// http://docs.unity3d.com/Manual/HOWTO-UIMultiResolution.html
 	}
