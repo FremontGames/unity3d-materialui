@@ -29,6 +29,7 @@ public class UICreator : MonoBehaviour {
 	        exit();
         GUILayout.EndHorizontal();
 		// TODO anchors
+		// http://docs.unity3d.com/Manual/HOWTO-UIMultiResolution.html
 	}
 
 	private void Update () {
