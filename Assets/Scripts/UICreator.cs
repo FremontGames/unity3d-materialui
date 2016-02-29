@@ -14,8 +14,6 @@ public class UICreator : MonoBehaviour {
 
 	int fontSize;
 
-	public int toolbarInt = 0;
-	public string[] toolbarStrings = new string[] {"Toolbar1", "Toolbar2", "Toolbar3"};
 	void OnGUI() {
 
 		// STYLE
@@ -29,17 +27,19 @@ public class UICreator : MonoBehaviour {
 		GUI.Button(new Rect(10, 10, 70, 30), "A button");
 		*/
 
-		// http://docs.unity3d.com/ScriptReference/Resources.Load.html
-		// http://docs.unity3d.com/ScriptReference/Material-color.html
+		// http://docs.unity3d.com/ScriptReference/RectOffset-ctor.html
+		button_style.border = new RectOffset(1,1,10,30);
 		// NORMAL
-		button_style.normal.textColor = Color.red;
-		// button_style.normal.background = (Texture2D) Resources.Load("test.png", typeof(Texture2D));
+		// http://docs.unity3d.com/ScriptReference/Material-color.html
+		button_style.normal.textColor = Color.grey;
+		// http://docs.unity3d.com/ScriptReference/Resources.Load.html
+		button_style.normal.background = (Texture2D) Resources.Load("test.png", typeof(Texture2D));
 		// HOVER
-		button_style.onHover.textColor = Color.white;
+		button_style.onHover.textColor = Color.black;
 		// ACTIVE
 		button_style.active.textColor = Color.blue;
 		// button_style.active.background = (Texture2D) Resources.Load("test.png", typeof(Texture2D));
-	
+
 		// UI
 		// http://docs.unity3d.com/ScriptReference/GUILayout.BeginArea.html
 		GUILayout.BeginHorizontal();
@@ -51,7 +51,7 @@ public class UICreator : MonoBehaviour {
 	        exit();
         GUILayout.EndHorizontal();
 
-		/*
+
 		// MIDDLE BAR
 		// http://docs.unity3d.com/ScriptReference/GUILayout.FlexibleSpace.html
 		GUILayout.BeginArea(new Rect(10, Screen.height/2, Screen.width-(10*2), 60));
@@ -61,14 +61,14 @@ public class UICreator : MonoBehaviour {
 			GUILayout.Button("RIGHT");
 			GUILayout.EndHorizontal();
 		GUILayout.EndArea();
-		*/
-/*
+
+
 		// BOTTOM BAR
 		GUILayout.BeginArea(new Rect(10, 120, Screen.width-(10*2), 60));
 		GUILayout.BeginHorizontal();
 			GUILayout.Button("ACTION");
 		GUILayout.EndArea();
-		*/
+
 	}
 
 	private void Update () {
