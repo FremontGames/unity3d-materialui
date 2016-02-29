@@ -9,15 +9,37 @@ using UnityEngine.Events;
 /*
  * see http://chikkooos.blogspot.fr/2015/03/new-ui-implementation-using-c-scripts.html
  */
+// https://unity3d.com/learn/tutorials/topics/user-interface-ui
 public class UICreator : MonoBehaviour {
 
 	int fontSize;
 
+	public int toolbarInt = 0;
+	public string[] toolbarStrings = new string[] {"Toolbar1", "Toolbar2", "Toolbar3"};
 	void OnGUI() {
+
 		// STYLE
 		// http://docs.unity3d.com/Manual/gui-Customization.html
-		GUIStyle style = GUI.skin.GetStyle ("button");
-		style.fontSize = fontSize;
+		// http://docs.unity3d.com/Manual/class-GUIStyle.html
+		GUIStyle button_style = GUI.skin.GetStyle ("button");
+		button_style.fontSize = fontSize; 
+
+	/*
+		GUI.backgroundColor = Color.yellow;
+		GUI.Button(new Rect(10, 10, 70, 30), "A button");
+		*/
+
+		// http://docs.unity3d.com/ScriptReference/Resources.Load.html
+		// http://docs.unity3d.com/ScriptReference/Material-color.html
+		// NORMAL
+		button_style.normal.textColor = Color.red;
+		// button_style.normal.background = (Texture2D) Resources.Load("test.png", typeof(Texture2D));
+		// HOVER
+		button_style.onHover.textColor = Color.white;
+		// ACTIVE
+		button_style.active.textColor = Color.blue;
+		// button_style.active.background = (Texture2D) Resources.Load("test.png", typeof(Texture2D));
+	
 		// UI
 		// http://docs.unity3d.com/ScriptReference/GUILayout.BeginArea.html
 		GUILayout.BeginHorizontal();
@@ -29,17 +51,24 @@ public class UICreator : MonoBehaviour {
 	        exit();
         GUILayout.EndHorizontal();
 
-		// BAR
+		/*
+		// MIDDLE BAR
 		// http://docs.unity3d.com/ScriptReference/GUILayout.FlexibleSpace.html
 		GUILayout.BeginArea(new Rect(10, Screen.height/2, Screen.width-(10*2), 60));
 		GUILayout.BeginHorizontal();
 			GUILayout.Button("LEFT");
 			GUILayout.FlexibleSpace();
 			GUILayout.Button("RIGHT");
-		GUILayout.EndHorizontal();
+			GUILayout.EndHorizontal();
 		GUILayout.EndArea();
-		// TODO anchors
-		// http://docs.unity3d.com/Manual/HOWTO-UIMultiResolution.html
+		*/
+/*
+		// BOTTOM BAR
+		GUILayout.BeginArea(new Rect(10, 120, Screen.width-(10*2), 60));
+		GUILayout.BeginHorizontal();
+			GUILayout.Button("ACTION");
+		GUILayout.EndArea();
+		*/
 	}
 
 	private void Update () {
@@ -50,7 +79,9 @@ public class UICreator : MonoBehaviour {
 		Debug.Log("UI:play");
 	}
 
-	private void Start() {
+	void Start () {
+	//	CreateUI();
+
 		// http://docs.unity3d.com/ScriptReference/Application-platform.html
 		// OS
 		if (Application.platform == RuntimePlatform.WindowsPlayer) {
@@ -60,8 +91,9 @@ public class UICreator : MonoBehaviour {
 		// MOBILE
 		else {
 			Debug.Log("setting for Mobile");
-			fontSize = Screen.width / 20;
+			fontSize = Screen.width / 15;
 		}
+
 	}
 
 	private void exit()	{
@@ -73,4 +105,5 @@ public class UICreator : MonoBehaviour {
 		Debug.Log("UI:cancel");
 		GameObject.Destroy(this);
 	}
+
 }
