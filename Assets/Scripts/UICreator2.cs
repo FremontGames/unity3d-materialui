@@ -6,9 +6,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-/*
- * see http://chikkooos.blogspot.fr/2015/03/new-ui-implementation-using-c-scripts.html
- */
 // https://unity3d.com/learn/tutorials/topics/user-interface-ui
 public class UICreator2 : MonoBehaviour {
 
