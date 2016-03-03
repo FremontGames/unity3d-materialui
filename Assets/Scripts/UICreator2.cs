@@ -9,7 +9,6 @@ using UnityEngine.Events;
 // https://unity3d.com/learn/tutorials/topics/user-interface-ui
 public class UICreator2 : MonoBehaviour {
 
-	int fontSize;
 
 	void OnGUI() {
 
@@ -17,7 +16,7 @@ public class UICreator2 : MonoBehaviour {
 		// http://docs.unity3d.com/Manual/gui-Customization.html
 		// http://docs.unity3d.com/Manual/class-GUIStyle.html
 		GUIStyle button_style = GUI.skin.GetStyle ("button");
-		button_style.fontSize = fontSize; 
+		button_style.fontSize = CommonProperties.fontSize; 
 
 		/*
 		GUI.backgroundColor = Color.yellow;
@@ -75,24 +74,7 @@ public class UICreator2 : MonoBehaviour {
 	private void play()	{
 		Debug.Log("UI:play");
 	}
-
-	void Start () {
-		//	CreateUI();
-
-		// http://docs.unity3d.com/ScriptReference/Application-platform.html
-		// OS
-		if (Application.platform == RuntimePlatform.WindowsPlayer) {
-			Debug.Log("setting for Desktop");
-			fontSize = Screen.width / 40;
-		}
-		// MOBILE
-		else {
-			Debug.Log("setting for Mobile");
-			fontSize = Screen.width / 15;
-		}
-
-	}
-
+		
 	private void exit()	{
 		Debug.Log("UI:exit");
 		Application.Quit();
