@@ -15,7 +15,8 @@ public class Main2 : MonoBehaviour
 			Debug.Log ("EditorStartup:gameObject 'Main Camera' must not be null!");
 		}
 		CommonProperties.init ();
-		gameObject.AddComponent<UICreator2> ();
+		gameObject.AddComponent<ThemeInitializer> ();
+		gameObject.AddComponent<Menu> ();
 		gameObject.AddComponent<PauseManager> ();
 		gameObject.AddComponent<SceneCreator> ();
 	}

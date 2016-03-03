@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
 // https://unity3d.com/learn/tutorials/topics/user-interface-ui
-public class UICreator2 : MonoBehaviour {
+public class Menu : MonoBehaviour {
 
 
 	void OnGUI() {
