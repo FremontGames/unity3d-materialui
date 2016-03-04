@@ -14,11 +14,12 @@ public class Main2 : MonoBehaviour
 		if (null == gameObject) {
 			Debug.Log ("EditorStartup:gameObject 'Main Camera' must not be null!");
 		}
-		CommonProperties.init ();
-		gameObject.AddComponent<ThemeInitializer> ();
-		gameObject.AddComponent<Menu> ();
+//		CommonProperties.init ();
+		gameObject.AddComponent<Menu2> ();
+/*		gameObject.AddComponent<ThemeInitializer> ();
+		gameObject.AddComponent<UICreator> ();
 		gameObject.AddComponent<PauseManager> ();
-		gameObject.AddComponent<SceneCreator> ();
+		gameObject.AddComponent<SceneCreator> (); */
 	}
 	
 	// Update is called once per frame
