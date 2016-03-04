@@ -16,10 +16,8 @@ public class ThemeInitializer : MonoBehaviour {
 		GUIStyle button_style = GUI.skin.GetStyle ("button");
 		button_style.fontSize = CommonProperties.fontSize; 
 
-		/*
-		GUI.backgroundColor = Color.yellow;
-		GUI.Button(new Rect(10, 10, 70, 30), "A button");
-		*/
+
+		Texture2D tex = Resources.Load<Texture2D>("button_bkg");
 
 		// http://docs.unity3d.com/ScriptReference/RectOffset-ctor.html
 		button_style.border = new RectOffset(1,1,10,30);
@@ -27,7 +25,7 @@ public class ThemeInitializer : MonoBehaviour {
 		// http://docs.unity3d.com/ScriptReference/Material-color.html
 		button_style.normal.textColor = Color.grey;
 		// http://docs.unity3d.com/ScriptReference/Resources.Load.html
-		button_style.normal.background = (Texture2D) Resources.Load("test.png", typeof(Texture2D));
+		button_style.normal.background = tex;
 		// HOVER
 		button_style.onHover.textColor = Color.black;
 		// ACTIVE

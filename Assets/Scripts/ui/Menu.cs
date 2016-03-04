@@ -23,7 +23,6 @@ public class Menu : MonoBehaviour {
 			exit();
 		GUILayout.EndHorizontal();
 
-
 		// MIDDLE BAR
 		// http://docs.unity3d.com/ScriptReference/GUILayout.FlexibleSpace.html
 		GUILayout.BeginArea(new Rect(10, Screen.height/2, Screen.width-(10*2), 60));
@@ -33,6 +32,11 @@ public class Menu : MonoBehaviour {
 		GUILayout.Button("RIGHT");
 		GUILayout.EndHorizontal();
 		GUILayout.EndArea();
+
+
+		Texture2D tex = Resources.Load<Texture2D>("button_bkg");
+		GUI.backgroundColor = Color.yellow;
+		GUI.Button(new Rect(150, 150, 70, 30), tex);
 
 
 		// BOTTOM BAR
