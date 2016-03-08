@@ -85,6 +85,7 @@ public class Menu2 : MonoBehaviour
 			Button button = buttonObject.AddComponent<Button>();
 			button.interactable = true;
 //			button.onClick.AddListener(eventListner);
+			// http://answers.unity3d.com/questions/792008/how-to-change-normal-color-highlighted-color-etc-i.html
 			button.transition = Selectable.Transition.ColorTint;
 			ColorBlock cb = button.colors;
 			button.targetGraphic = image;
