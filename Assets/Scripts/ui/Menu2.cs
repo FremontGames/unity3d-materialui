@@ -19,6 +19,7 @@ public class Menu2 : MonoBehaviour
 		RectTransform canvasTrans = canvasObject.AddComponent<RectTransform>();
 		// Canvas
 		Canvas canvas = canvasObject.AddComponent<Canvas>();
+		// http://docs.unity3d.com/Manual/UICanvas.html
 		canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 		// Canvas Scaler
 		// http://docs.unity3d.com/ScriptReference/UI.CanvasScaler.html
@@ -30,7 +31,7 @@ public class Menu2 : MonoBehaviour
 			int x = 0;
 			int y = 50;
 			int w = 160;
-			int h = 50;
+			int h = 30;
 
 			GameObject buttonObject = new GameObject("Button");
 			buttonObject.transform.SetParent(canvasObject.transform);
@@ -63,6 +64,7 @@ public class Menu2 : MonoBehaviour
 			float pixelsPerUnit = 100.0f;
 			uint extrude = 0;
 			SpriteMeshType meshType = SpriteMeshType.Tight;
+			// http://docs.unity3d.com/450/Documentation/ScriptReference/Sprite-border.html
 			// Vector4 border = Vector4.zero;
 			// http://docs.unity3d.com/ScriptReference/Vector4.html
 			Vector4 border = new Vector4(10, 10,10, 10);
@@ -78,7 +80,32 @@ public class Menu2 : MonoBehaviour
 			// Button Script TODO
 
 			{
-				// Text TODO
+				x = 0;
+				y = 0;
+				w = 0;
+				h = 0;
+
+				GameObject textObject = new GameObject("Text");
+				textObject.transform.SetParent(buttonObject.transform);
+
+				RectTransform trans = textObject.AddComponent<RectTransform>();
+				trans.sizeDelta.Set(w, h);
+				trans.anchoredPosition3D = new Vector3(0, 0, 0);
+				trans.anchoredPosition = new Vector2(x, y);
+				trans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+				trans.localPosition.Set(0, 0, 0);
+
+				CanvasRenderer renderer = textObject.AddComponent<CanvasRenderer>();
+
+				Text text = textObject.AddComponent<Text>();
+				text.supportRichText = true;
+				text.text = "message";
+				text.fontSize = 14;
+				text.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+				text.alignment = TextAnchor.MiddleCenter;
+				text.horizontalOverflow = HorizontalWrapMode.Overflow;
+				text.color = Color.white;
+
 			}
 
 		}
