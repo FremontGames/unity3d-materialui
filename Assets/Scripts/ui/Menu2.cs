@@ -8,6 +8,28 @@ using UnityEngine.Events;
 
 public class Menu2 : MonoBehaviour
 {
+	void init(Image image, string resource) {
+		Texture2D tex = Resources.Load<Texture2D>(resource);
+
+		// IF scliced
+		// http://docs.unity3d.com/ScriptReference/Sprite.Create.html
+		float pixelsPerUnit = 100.0f;
+		uint extrude = 0;
+		SpriteMeshType meshType = SpriteMeshType.Tight;
+		// http://docs.unity3d.com/450/Documentation/ScriptReference/Sprite-border.html
+		// Vector4 border = Vector4.zero;
+		// http://docs.unity3d.com/ScriptReference/Vector4.html
+		Vector4 border = new Vector4(10, 10,10, 10);
+		image.type = Image.Type.Sliced;
+
+		// ELSE
+		// image.type = Image.Type.Simple;
+
+		image.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height),
+			new Vector2(0.5f, 0.5f), pixelsPerUnit, extrude, meshType, 
+			border);		
+	}
+
 
 	// Use this for initialization
 	void Start ()
@@ -57,41 +79,35 @@ public class Menu2 : MonoBehaviour
 
 			// Image
 			Image image = buttonObject.AddComponent<Image>();
-			Texture2D tex = Resources.Load<Texture2D>("button_bkg");
-
-			// IF scliced
-			// http://docs.unity3d.com/ScriptReference/Sprite.Create.html
-			float pixelsPerUnit = 100.0f;
-			uint extrude = 0;
-			SpriteMeshType meshType = SpriteMeshType.Tight;
-			// http://docs.unity3d.com/450/Documentation/ScriptReference/Sprite-border.html
-			// Vector4 border = Vector4.zero;
-			// http://docs.unity3d.com/ScriptReference/Vector4.html
-			Vector4 border = new Vector4(10, 10,10, 10);
-			image.type = Image.Type.Sliced;
-
-			// ELSE
-			// image.type = Image.Type.Simple;
-
-			image.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height),
-				new Vector2(0.5f, 0.5f), pixelsPerUnit, extrude, meshType, 
-				border);
+			init(image, "button_bkg");
 
 			// Button Script TODO
+			Button button = buttonObject.AddComponent<Button>();
+			button.interactable = true;
+//			button.onClick.AddListener(eventListner);
+			button.transition = Selectable.Transition.ColorTint;
+			ColorBlock cb = button.colors;
+			button.targetGraphic = image;
+			cb.normalColor = Color.grey;
+			cb.highlightedColor = Color.red;
+			cb.pressedColor = Color.green;
+			cb.colorMultiplier = 1f;
+			cb.fadeDuration = 0.1f;
+			button.colors = cb;
 
 			{
-				x = 0;
-				y = 0;
-				w = 0;
-				h = 0;
+				int x2 = 0;
+				int y2 = 0;
+				int w2 = 0;
+				int h2 = 0;
 
 				GameObject textObject = new GameObject("Text");
 				textObject.transform.SetParent(buttonObject.transform);
 
 				RectTransform trans = textObject.AddComponent<RectTransform>();
-				trans.sizeDelta.Set(w, h);
+				trans.sizeDelta.Set(w2, h2);
 				trans.anchoredPosition3D = new Vector3(0, 0, 0);
-				trans.anchoredPosition = new Vector2(x, y);
+				trans.anchoredPosition = new Vector2(x2, y2);
 				trans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 				trans.localPosition.Set(0, 0, 0);
 
