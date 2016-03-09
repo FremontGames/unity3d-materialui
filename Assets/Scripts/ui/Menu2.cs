@@ -13,8 +13,7 @@ public class Menu2 : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		GameObject canvasObject = new GameObject("Canvas");
-		canvasObject.transform.SetParent(this.transform);
+		GameObject canvasObject = new GameObject("Canvas2");
 		f.initCanvas (canvasObject);
 
 //		GameObject canvasObject2 = f.initCanvas2(this);
@@ -24,12 +23,16 @@ public class Menu2 : MonoBehaviour
 			buttonObject2
 		};
 */
-		// TODO
-		// canvas "c1"
-		//	button "b1"
-		//		text "test1"
-		//	button "b2"
-		//		text "test2"
+		// TODO HTML to Canvas
+		// canvas(
+		//	button(
+		//		text("test1"))
+		//,
+		//	button(
+		//		text("test2"), )
+		//)
+		// http://docs.unity3d.com/Manual/JSONSerialization.html
+		// myObject = JsonUtility.FromJson<MyClass>(json);
 	}
 
 	// Update is called once per frame
