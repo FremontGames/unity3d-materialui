@@ -94,10 +94,12 @@ public class UIFactory {
 		Image image = buttonObject.AddComponent<Image>();
 		init(image, "button_bkg");
 
-		// Button Script TODO
+		// Button Script
 		Button button = buttonObject.AddComponent<Button>();
 		button.interactable = true;
 		button.onClick.AddListener(eventListner);
+
+		// Button animation
 		// http://answers.unity3d.com/questions/792008/how-to-change-normal-color-highlighted-color-etc-i.html
 		button.transition = Selectable.Transition.ColorTint;
 		ColorBlock cb = button.colors;
