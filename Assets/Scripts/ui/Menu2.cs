@@ -21,6 +21,7 @@ public class Menu2 : MonoBehaviour
 
 		GameObject panel = f.CreatePanel(canvas.transform);
 
+		// make builder pattern or json
 		f.CreateText(panel.transform, 0, 100, 160, 50, "Message", 32);
 		f.CreateText(panel.transform, 0, 0, 160, 50, "Are you sure, you want to exit?", 24);
 
