@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class Main2 : MonoBehaviour
+public class Main : MonoBehaviour
 {
 
 	GameObject gameObject;

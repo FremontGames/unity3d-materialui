@@ -8,7 +8,7 @@ using UnityEngine.Events;
 		
 public class UIFactory {
 
-
+/*
 	public  void init(Image image, string resource) {
 		Texture2D tex = Resources.Load<Texture2D>(resource);
 
@@ -30,7 +30,7 @@ public class UIFactory {
 			new Vector2(0.5f, 0.5f), pixelsPerUnit, extrude, meshType, 
 			border);		
 	}
-
+*/
 	public void initText(GameObject textObject, string message) {
 		int x2 = 0;
 		int y2 = 0;
@@ -89,17 +89,17 @@ public class UIFactory {
 		buttonTrans.anchoredPosition = new Vector2(x, y);
 		buttonTrans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 		buttonTrans.localPosition.Set(0, 0, 0);
-
+/*
 		// Image
 		Image image = buttonObject.AddComponent<Image>();
 		init(image, "button_bkg");
-
+*/
 		// Button Script
-		Button button = buttonObject.AddComponent<Button>();
+/*		Button button = buttonObject.AddComponent<Button>();
 		button.interactable = true;
 		button.onClick.AddListener(eventListner);
-
-		// Button animation
+*/
+/*		// Button animation
 		// http://answers.unity3d.com/questions/792008/how-to-change-normal-color-highlighted-color-etc-i.html
 		button.transition = Selectable.Transition.ColorTint;
 		ColorBlock cb = button.colors;
@@ -110,7 +110,7 @@ public class UIFactory {
 		cb.colorMultiplier = 1f;
 		cb.fadeDuration = 0.1f;
 		button.colors = cb;
-
+*/
 		{
 			GameObject textObject = new GameObject("Text");
 			textObject.transform.SetParent(buttonObject.transform);
