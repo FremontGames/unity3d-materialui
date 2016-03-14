@@ -24,15 +24,15 @@ public class UIFactory : MonoBehaviour
 		Canvas canvas = canvasObject.AddComponent<Canvas> ();
 		// http://docs.unity3d.com/Manual/UICanvas.html
 		canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-/*		canvas.pixelPerfect = true;
-*/		// Canvas Scaler
+		canvas.pixelPerfect = true;
+		// Canvas Scaler
 		// http://docs.unity3d.com/ScriptReference/UI.CanvasScaler.html
 		CanvasScaler canvasScaler = canvasObject.AddComponent<CanvasScaler> ();
-		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPhysicalSize;
+/*		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPhysicalSize;
 		canvasScaler.physicalUnit = CanvasScaler.Unit.Points;
-/*		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+*/		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
 		canvasScaler.referenceResolution = new Vector2(800, 600);
-*/		
+
 		GraphicRaycaster canvasRayc = canvasObject.AddComponent<GraphicRaycaster> ();
 
 		canvasObject.transform.SetParent (parent);
