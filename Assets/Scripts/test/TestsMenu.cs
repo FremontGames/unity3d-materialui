@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class Menu2 : MonoBehaviour
+public class TestsMenu : MonoBehaviour
 {
 	UIFactory f = new UIFactory();
 
@@ -22,12 +22,11 @@ public class Menu2 : MonoBehaviour
 		GameObject panel = f.CreatePanel(canvas.transform);
 
 		// make builder pattern or json
-		f.CreateText(panel.transform, 0, 100, 160, 50, "Message", 32);
-		f.CreateText(panel.transform, 0, 0, 160, 50, "Are you sure, you want to exit?", 24);
+		f.CreateText(panel.transform, 0, 100, 160, 50, "Tests", 32);
+		f.CreateText(panel.transform, 0, 0, 160, 50, "Choose a demo", 24);
 
-		f.CreateButton(panel.transform, -100, -100, 160, 50, "Yes", delegate {action();});
-//		f.CreateButton(panel.transform, 100, -100, 160, 50, "No", delegate {OnCancel();});
-
+		f.CreateButton(panel.transform, 0, -100, 300, 70, "Main", delegate {action();});
+		f.CreateButton(panel.transform, 0, -200, 300, 70, "Map", delegate {action();});
 
 		/*
 

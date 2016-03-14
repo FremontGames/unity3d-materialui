@@ -13,21 +13,23 @@ public class Main : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		// GET MAIN OBJECT
 		Debug.Log ("Main:Started!");
 		gameObject = GameObject.Find ("Main Camera");
 		if (null == gameObject) {
 			Debug.Log ("EditorStartup:gameObject 'Main Camera' must not be null!");
 		}
+
 //		CommonProperties.init ();
 
+		// EVENT BUS
 		CreateEventSystem(this.transform);
 
-
+		// INIT SCRIPTS
+		gameObject.AddComponent<ThemeInitializer> ();
 		gameObject.AddComponent<EventManager> ();
-		gameObject.AddComponent<Menu2> ();
-/*		gameObject.AddComponent<ThemeInitializer> ();
-		gameObject.AddComponent<UICreator> ();
-		gameObject.AddComponent<PauseManager> ();
+		gameObject.AddComponent<TestsMenu> ();
+/*		gameObject.AddComponent<PauseManager> ();
 		gameObject.AddComponent<SceneCreator> (); */
 	}
 
