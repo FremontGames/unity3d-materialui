@@ -17,7 +17,8 @@ public class TestsMenu : MonoBehaviour
 		GameObject canvas = f.CreateCanvas(this.transform);
 
 //		f.CreateEventSystem(canvas.transform);
-		EventManager.StartListening ("test", reaction);
+		EventManager.StartListening ("exec:EditorTest", reaction);
+		EventManager.StartListening ("exec", reaction);
 
 		GameObject panel = f.CreatePanel(canvas.transform);
 
@@ -26,7 +27,8 @@ public class TestsMenu : MonoBehaviour
 		f.CreateText(panel.transform, 0, 0, 160, 50, "Choose a demo", 24);
 
 		f.CreateButton(panel.transform, 0, -100, 300, 70, "Main", delegate {action();});
-		f.CreateButton(panel.transform, 0, -200, 300, 70, "Map", delegate {action();});
+		f.CreateButton(panel.transform, 0, -200, 300, 70, "Editor", delegate {action2();});
+		f.CreateButton(panel.transform, 0, -300, 300, 70, "Map", delegate {action2();});
 
 		/*
 
@@ -51,14 +53,25 @@ public class TestsMenu : MonoBehaviour
 	{
 	
 	}
+
 	private void action()
 	{
 		Debug.Log("Menu2:action...");
-		EventManager.TriggerEvent ("test");
+		EventManager.TriggerEvent ("exec:MainMenu");
 	}
+	private void action2()
+	{
+		Debug.Log("Menu2:action2...");
+		EventManager.TriggerEvent ("exec:EditorTest");
+	}
+
+
 	private void reaction()
 	{
 		Debug.Log("Menu2:reaction...");
+		Destroy (this);
+		GameObject gameObject = GameObject.Find ("Main Camera");
+		gameObject.AddComponent<EditorTest> ();
 	}
 
 }

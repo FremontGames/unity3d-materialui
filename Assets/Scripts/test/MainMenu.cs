@@ -25,7 +25,8 @@ public class MainMenu : MonoBehaviour
 		f.CreateText(panel.transform, 0, 100, 160, 50, "Message", 32);
 		f.CreateText(panel.transform, 0, 0, 160, 50, "Are you sure, you want to exit?", 24);
 
-		f.CreateButton(panel.transform, -100, -100, 160, 50, "Yes", delegate {action();});
+		f.CreateButton(panel.transform, 0, -100, 160, 50, "Yes", delegate {action();});
+		f.CreateButton(panel.transform, 0, -200, 160, 50, "Yes", delegate {action2();});
 //		f.CreateButton(panel.transform, 100, -100, 160, 50, "No", delegate {OnCancel();});
 
 
@@ -52,11 +53,18 @@ public class MainMenu : MonoBehaviour
 	{
 	
 	}
+
 	private void action()
 	{
 		Debug.Log("Menu2:action...");
-		EventManager.TriggerEvent ("test");
+		EventManager.TriggerEvent ("test1");
 	}
+	private void action2()
+	{
+		Debug.Log("Menu2:action2...");
+		EventManager.TriggerEvent ("test2");
+	}
+
 	private void reaction()
 	{
 		Debug.Log("Menu2:reaction...");
