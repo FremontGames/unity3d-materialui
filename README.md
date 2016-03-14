@@ -12,6 +12,7 @@ Roadmap:
 - UI
   - Animation
 - Language extension
+  - Logging
   - Assertions
   - Date
   - Transformation
