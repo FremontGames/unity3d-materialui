@@ -17,3 +17,7 @@ Roadmap:
   - Date
   - Transformation
   - Builder
+- Plateforme
+  - Responsive
+  - ScreenSize
+  - User ID
