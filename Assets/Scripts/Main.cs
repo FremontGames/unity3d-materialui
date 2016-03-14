@@ -30,6 +30,7 @@ public class Main : MonoBehaviour
 		gameObject.AddComponent<PauseManager> ();
 		gameObject.AddComponent<SceneCreator> (); */
 	}
+
 	private GameObject CreateEventSystem(Transform parent) {
 		GameObject esObject = new GameObject("EventSystem");
 		

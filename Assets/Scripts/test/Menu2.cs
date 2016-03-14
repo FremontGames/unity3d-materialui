@@ -8,7 +8,7 @@ using UnityEngine.Events;
 
 public class Menu2 : MonoBehaviour
 {
-	UIFactory2 f = new UIFactory2();
+	UIFactory f = new UIFactory();
 
 	// Use this for initialization
 	void Start ()
