@@ -8,54 +8,34 @@ using UnityEngine.Events;
 
 public class Quit : MonoBehaviour
 {
-	UIFactory f = new UIFactory();
 
 	// VIEW ***********************************************
 
-	// Use this for initialization
 	void Start ()
 	{
-		GameObject canvas = f.CreateCanvas(/*this.transform*/);
-
-//		f.CreateEventSystem(canvas.transform);
-		EventManager.StartListening ("test", reaction);
-
-		GameObject panel = f.CreatePanel(canvas.transform);
-
-		// make builder pattern or json
-		f.CreateText(panel.transform, 0, 100, 160, 50, "Message", 32);
-		f.CreateText(panel.transform, 0, 0, 160, 50, "Are you sure, you want to exit?", 24);
-
-		f.CreateButton(panel.transform, 0, -100, 160, 50, "Yes", delegate {action();});
-		f.CreateButton(panel.transform, 0, -200, 160, 50, "Yes", delegate {action2();});
-//		f.CreateButton(panel.transform, 100, -100, 160, 50, "No", delegate {OnCancel();});
-
+		GameObject canvas = UIFactory.CreateCanvas (this.transform);
+		GameObject panel = UIFactory.CreatePanel (canvas.transform);
+		UIFactory.CreateText (panel.transform, 0, 100, 160, 50, "Message", 32);
+		UIFactory.CreateText (panel.transform, 0, 0, 160, 50, "Are you sure, you want to exit?", 24);
+		UIFactory.CreateButton (panel.transform, 0, -100, 160, 50, "Yes", delegate {
+			yes ();
+		});
+		UIFactory.CreateButton (panel.transform, 0, -200, 160, 50, "No", delegate {
+			no ();
+		});
 	}
-
-	// Update is called once per frame
-	void Update ()
-	{
-	
-	}
-
+		
 	// PRESENTER ***********************************************
 
-
-	private void action()
+	private void yes ()
 	{
-		Debug.Log("Menu2:action...");
-		EventManager.TriggerEvent ("test1");
+		Application.Quit ();
 	}
 
-	private void action2()
+	private void no ()
 	{
-		Debug.Log("Menu2:action2...");
-		EventManager.TriggerEvent ("test2");
+		GameObject.Destroy (this);
+		GameObject m = new GameObject ("Menu");
+		m.AddComponent<Menu> ();
 	}
-
-	private void reaction()
-	{
-		Debug.Log("Menu2:reaction...");
-	}
-
 }

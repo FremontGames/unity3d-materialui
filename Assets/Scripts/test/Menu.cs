@@ -8,35 +8,40 @@ using UnityEngine.Events;
 
 public class Menu : MonoBehaviour
 {
-	// Use this for initialization
+	// VIEW
+
 	void Start ()
 	{
-		// VIEW
-		UIFactory f = new UIFactory ();
-		// f.CreateEventSystem(canvas.transform);
-		GameObject c = f.CreateCanvas (/*this.transform*/);
-		GameObject p = f.CreatePanel (c.transform);
-		f.CreateText (p.transform, 0, 100, 160, 50, "Tests", 32);
-		f.CreateText (p.transform, 0, 0, 160, 50, "Choose a demo", 24);
-		f.CreateButton (p.transform, 0, -100, 300, 70, "Main", delegate {
-			EventManager.TriggerEvent ("open:MainMenu");
+		GameObject c = UIFactory.CreateCanvas (this.transform);
+		GameObject p = UIFactory.CreatePanel (c.transform);
+		UIFactory.CreateText (p.transform, 0, 100, 160, 50, "Tests", 32);
+		UIFactory.CreateText (p.transform, 0, 0, 160, 50, "Choose a demo", 24);
+		UIFactory.CreateButton (p.transform, 0, -100, 300, 70, "Quit", delegate {
+			quit ();
 		});
-		f.CreateButton (p.transform, 0, -200, 300, 70, "Editor", delegate {
-			EventManager.TriggerEvent ("open:EditorTest");
+		UIFactory.CreateButton (p.transform, 0, -200, 300, 70, "Editor", delegate {
+			editor ();
 		});
-		f.CreateButton (p.transform, 0, -300, 300, 70, "Map", delegate {
-			EventManager.TriggerEvent ("exec:MapMenu");
+		UIFactory.CreateButton (p.transform, 0, -300, 300, 70, "Map", delegate {
+
 		});
 
-		// PRESENTER
-		EventManager.StartListening ("open:MainMenu", delegate {
-			Destroy (this);
-			GameObject.Find ("Main Camera").AddComponent<Menu> ();
-		});
-		EventManager.StartListening ("open:EditorTest", delegate {
-			Destroy (this);
-			GameObject.Find ("Main Camera").AddComponent<Editor> ();
-		});
+	}
+
+	// PRESENTER
+
+	void quit ()
+	{
+		DestroyImmediate (this);
+		GameObject m = new GameObject ("Quit");
+		m.AddComponent<Quit> ();
+	}
+
+	void editor ()
+	{
+		Destroy (this);
+		GameObject m = new GameObject ("Editor");
+		m.AddComponent<Editor> ();
 	}
 
 }

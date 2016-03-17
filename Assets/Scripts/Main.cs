@@ -12,35 +12,21 @@ public class Main : MonoBehaviour
 	{
 //		CommonProperties.init ();
 
-		// EVENT BUS
-		CreateEventSystem(this.transform);
 
 		// INIT SCRIPTS
-		GameObject go = new GameObject("Cool GameObject made from Code");
+		GameObject go = new GameObject ("Core");
+		UIFactory.CreateEventSystem (go.transform);
 		go.AddComponent<ThemeInitializer> ();
 		go.AddComponent<EventManager> ();
-		go.AddComponent<Menu> ();
-/*		gameObject.AddComponent<PauseManager> ();
+		/*
+		 * gameObject.AddComponent<PauseManager> ();
 		gameObject.AddComponent<SceneCreator> (); */
+
+		// FIRST SCREEN
+		GameObject m = new GameObject ("Menu");
+		m.AddComponent<Menu> ();
 	}
 
-	private GameObject CreateEventSystem(Transform parent) {
-		GameObject esObject = new GameObject("EventSystem");
-		
-		EventSystem esClass = esObject.AddComponent<EventSystem>();
-		esClass.sendNavigationEvents = true;
-		esClass.pixelDragThreshold = 5;
-		
-		StandaloneInputModule stdInput = esObject.AddComponent<StandaloneInputModule>();
-		stdInput.horizontalAxis = "Horizontal";
-		stdInput.verticalAxis = "Vertical";
-		
-//		TouchInputModule touchInput = esObject.AddComponent<TouchInputModule>();
-		
-		esObject.transform.SetParent(parent);
-		
-		return esObject;
-	}
 	// Update is called once per frame
 	void Update ()
 	{

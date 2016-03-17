@@ -14,7 +14,7 @@ public class UIFactory : MonoBehaviour
 
 	private const int LayerUI = 5;
 
-	public GameObject CreateCanvas (/*Transform parent*/)
+	public static GameObject CreateCanvas (Transform parent)
 	{
 		// create the canvas
 		GameObject canvasObject = new GameObject ("Canvas");
@@ -35,11 +35,11 @@ public class UIFactory : MonoBehaviour
 
 		GraphicRaycaster canvasRayc = canvasObject.AddComponent<GraphicRaycaster> ();
 
-	//	canvasObject.transform.SetParent (parent);
+		canvasObject.transform.SetParent (parent);
 		return canvasObject;
 	}
 
-	public GameObject CreateEventSystem (Transform parent)
+	public static GameObject CreateEventSystem (Transform parent)
 	{
 		GameObject esObject = new GameObject ("EventSystem");
 
@@ -58,7 +58,7 @@ public class UIFactory : MonoBehaviour
 		return esObject;
 	}
 
-	public GameObject CreatePanel (Transform parent)
+	public static GameObject CreatePanel (Transform parent)
 	{
 		GameObject panelObject = new GameObject ("Panel");
 		panelObject.transform.SetParent (parent);
@@ -86,7 +86,7 @@ public class UIFactory : MonoBehaviour
 		return panelObject;
 	}
 
-	public GameObject CreateText (Transform parent, float x, float y,
+	public static GameObject CreateText (Transform parent, float x, float y,
 	                             float w, float h, string message, int fontSize)
 	{
 		GameObject textObject = new GameObject ("Text");
@@ -115,7 +115,7 @@ public class UIFactory : MonoBehaviour
 		return textObject;
 	}
 
-	public GameObject CreateButton (Transform parent, float x, float y,
+	public static GameObject CreateButton (Transform parent, float x, float y,
 	                               float w, float h, string message,
 	                               UnityAction eventListner)
 	{
@@ -161,7 +161,7 @@ public class UIFactory : MonoBehaviour
 		return buttonObject;
 	}
 
-	public  void init (Image image, string resource)
+	public static  void init (Image image, string resource)
 	{
 		Texture2D tex = Resources.Load<Texture2D> (resource);
 
