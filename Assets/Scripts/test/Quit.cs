@@ -34,8 +34,7 @@ public class Quit : MonoBehaviour
 
 	private void no ()
 	{
-		GameObject.Destroy (this);
-		GameObject m = new GameObject ("Menu");
-		m.AddComponent<Menu> ();
+		Destroy (GameObject.Find ("Quit"));
+		new GameObject ("Menu").AddComponent<Menu> ();
 	}
 }

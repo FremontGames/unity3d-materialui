@@ -32,16 +32,16 @@ public class Menu : MonoBehaviour
 
 	void quit ()
 	{
-		DestroyImmediate (this);
-		GameObject m = new GameObject ("Quit");
-		m.AddComponent<Quit> ();
+		// TODO use Destroy(this)
+		Destroy (GameObject.Find ("Menu"));
+		new GameObject ("Quit").AddComponent<Quit> ();
 	}
 
 	void editor ()
 	{
-		Destroy (this);
-		GameObject m = new GameObject ("Editor");
-		m.AddComponent<Editor> ();
+		// TODO use Destroy(this)
+		Destroy (GameObject.Find ("Menu"));
+		new GameObject ("Editor").AddComponent<Editor> ();
 	}
 
 }
