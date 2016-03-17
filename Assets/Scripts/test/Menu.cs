@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class TestsMenu : MonoBehaviour
+public class Menu : MonoBehaviour
 {
 	// Use this for initialization
 	void Start ()
@@ -14,7 +14,7 @@ public class TestsMenu : MonoBehaviour
 		// VIEW
 		UIFactory f = new UIFactory ();
 		// f.CreateEventSystem(canvas.transform);
-		GameObject c = f.CreateCanvas (this.transform);
+		GameObject c = f.CreateCanvas (/*this.transform*/);
 		GameObject p = f.CreatePanel (c.transform);
 		f.CreateText (p.transform, 0, 100, 160, 50, "Tests", 32);
 		f.CreateText (p.transform, 0, 0, 160, 50, "Choose a demo", 24);
@@ -31,11 +31,11 @@ public class TestsMenu : MonoBehaviour
 		// PRESENTER
 		EventManager.StartListening ("open:MainMenu", delegate {
 			Destroy (this);
-			GameObject.Find ("Main Camera").AddComponent<MainMenu> ();
+			GameObject.Find ("Main Camera").AddComponent<Menu> ();
 		});
 		EventManager.StartListening ("open:EditorTest", delegate {
 			Destroy (this);
-			GameObject.Find ("Main Camera").AddComponent<EditorTest> ();
+			GameObject.Find ("Main Camera").AddComponent<Editor> ();
 		});
 	}
 

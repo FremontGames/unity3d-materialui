@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
 // https://unity3d.com/learn/tutorials/topics/user-interface-ui
-public class EditorTest : MonoBehaviour {
+public class Editor : MonoBehaviour {
 
 
 	void OnGUI() {

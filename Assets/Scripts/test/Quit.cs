@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class MainMenu : MonoBehaviour
+public class Quit : MonoBehaviour
 {
 	UIFactory f = new UIFactory();
 
@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		GameObject canvas = f.CreateCanvas(this.transform);
+		GameObject canvas = f.CreateCanvas(/*this.transform*/);
 
 //		f.CreateEventSystem(canvas.transform);
 		EventManager.StartListening ("test", reaction);

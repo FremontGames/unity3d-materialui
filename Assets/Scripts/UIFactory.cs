@@ -14,7 +14,7 @@ public class UIFactory : MonoBehaviour
 
 	private const int LayerUI = 5;
 
-	public GameObject CreateCanvas (Transform parent)
+	public GameObject CreateCanvas (/*Transform parent*/)
 	{
 		// create the canvas
 		GameObject canvasObject = new GameObject ("Canvas");
@@ -35,7 +35,7 @@ public class UIFactory : MonoBehaviour
 
 		GraphicRaycaster canvasRayc = canvasObject.AddComponent<GraphicRaycaster> ();
 
-		canvasObject.transform.SetParent (parent);
+	//	canvasObject.transform.SetParent (parent);
 		return canvasObject;
 	}
 

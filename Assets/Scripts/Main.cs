@@ -7,28 +7,19 @@ using UnityEngine.Events;
 
 public class Main : MonoBehaviour
 {
-
-	GameObject gameObject;
-
 	// Use this for initialization
 	void Start ()
 	{
-		// GET MAIN OBJECT
-		Debug.Log ("Main:Started!");
-		gameObject = GameObject.Find ("Main Camera");
-		if (null == gameObject) {
-			Debug.Log ("EditorStartup:gameObject 'Main Camera' must not be null!");
-		}
-
 //		CommonProperties.init ();
 
 		// EVENT BUS
 		CreateEventSystem(this.transform);
 
 		// INIT SCRIPTS
-		gameObject.AddComponent<ThemeInitializer> ();
-		gameObject.AddComponent<EventManager> ();
-		gameObject.AddComponent<TestsMenu> ();
+		GameObject go = new GameObject("Cool GameObject made from Code");
+		go.AddComponent<ThemeInitializer> ();
+		go.AddComponent<EventManager> ();
+		go.AddComponent<Menu> ();
 /*		gameObject.AddComponent<PauseManager> ();
 		gameObject.AddComponent<SceneCreator> (); */
 	}
@@ -44,7 +35,7 @@ public class Main : MonoBehaviour
 		stdInput.horizontalAxis = "Horizontal";
 		stdInput.verticalAxis = "Vertical";
 		
-		TouchInputModule touchInput = esObject.AddComponent<TouchInputModule>();
+//		TouchInputModule touchInput = esObject.AddComponent<TouchInputModule>();
 		
 		esObject.transform.SetParent(parent);
 		
