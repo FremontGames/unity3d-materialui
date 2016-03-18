@@ -6,9 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-/*
- * see http://chikkooos.blogspot.fr/2015/03/new-ui-implementation-using-c-scripts.html
- */
+// http://chikkooos.blogspot.fr/2015/03/new-ui-implementation-using-c-scripts.html
 public class UIFactory : MonoBehaviour
 {
 
@@ -77,6 +75,12 @@ public class UIFactory : MonoBehaviour
 		trans.localScale = new Vector3 (0.8f, 0.8f, 1.0f);
 
 		CanvasRenderer renderer = panelObject.AddComponent<CanvasRenderer> ();
+
+		// TRANSITION
+		// http://docs.unity3d.com/ScriptReference/Color.Lerp.html
+		float fadeSpeed = 5.5f;
+		Color lerpedColor = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time, 1));
+		renderer.SetColor (lerpedColor);
 
 		Image image = panelObject.AddComponent<Image> ();
 		Texture2D tex = Resources.Load<Texture2D> ("panel_bkg");

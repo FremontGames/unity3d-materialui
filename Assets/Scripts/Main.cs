@@ -13,16 +13,18 @@ public class Main : MonoBehaviour
 //		CommonProperties.init ();
 
 
-		// INIT SCRIPTS
-		GameObject go = new GameObject ("Core");
-		UIFactory.CreateEventSystem (go.transform);
-		go.AddComponent<ThemeInitializer> ();
-		go.AddComponent<EventManager> ();
-		/*
-		 * gameObject.AddComponent<PauseManager> ();
-		gameObject.AddComponent<SceneCreator> (); */
+		// VENDOR OBJECTS
+		GameObject em = new GameObject ("EventManager");
+		UIFactory.CreateEventSystem (em.transform);
+		em.AddComponent<EventManager> ();
 
-		// FIRST SCREEN
+		GameObject sm = new GameObject ("ScreenManager");
+		sm.AddComponent<ScreenManager> ();
+
+		// go.AddComponent<ThemeInitializer> ();
+		// gameObject.AddComponent<PauseManager> ();
+
+		// CORE OBJECTS
 		GameObject m = new GameObject ("Menu");
 		m.AddComponent<Menu> ();
 	}
