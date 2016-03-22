@@ -12,17 +12,30 @@ public class Menu : MonoBehaviour
 
 	void Start ()
 	{
-		GameObject c = UIFactory.CreateCanvas (this.transform);
-		GameObject p = UIFactory.CreatePanel (c.transform);
-		UIFactory.CreateText (p.transform, 0, 100, 160, 50, "Tests", 32);
-		UIFactory.CreateText (p.transform, 0, 0, 160, 50, "Choose a demo", 24);
-		UIFactory.CreateButton (p.transform, 0, -100, 300, 70, "Quit", delegate {
+		GameObject canvas = new CanvasBuilder (this.transform).build();
+		GameObject panel = new PanelBuilder (canvas.transform).build();
+		TextBuilder text = new TextBuilder (panel.transform);
+		text.y (100).text ("Tests").fontSize(32).build ();
+		text.y (0).text ("Choose a demo").fontSize(24).build ();
+
+		// BUI_Modal(this,
+		//		BUI_PageHeader(
+		//		  	BUI_Text.text("Test").subtext("Choose a demo")
+		//		),
+		//		BUI_BtnGroupVertical(
+		//			BUI_Button.text("Quit")
+		//			BUI_Button.text("Editor")
+		//			BUI_Button.text("Map")
+		//		)
+		//	);
+
+		UIFactory.CreateButton (panel.transform, 0, -100, 300, 70, "Quit", delegate {
 			quit ();
 		});
-		UIFactory.CreateButton (p.transform, 0, -200, 300, 70, "Editor", delegate {
+		UIFactory.CreateButton (panel.transform, 0, -200, 300, 70, "Editor", delegate {
 			editor ();
 		});
-		UIFactory.CreateButton (p.transform, 0, -300, 300, 70, "Map", delegate {
+		UIFactory.CreateButton (panel.transform, 0, -300, 300, 70, "Map", delegate {
 
 		});
 

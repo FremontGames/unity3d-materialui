@@ -78,8 +78,8 @@ public class UIFactory : MonoBehaviour
 
 		// TRANSITION
 		// http://docs.unity3d.com/ScriptReference/Color.Lerp.html
-		float fadeSpeed = 5.5f;
-		Color lerpedColor = Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time, 1));
+		float fadeSpeed = 0.5f;
+		Color lerpedColor = Color.Lerp(Color.white, Color.black, fadeSpeed);
 		renderer.SetColor (lerpedColor);
 
 		Image image = panelObject.AddComponent<Image> ();
@@ -146,7 +146,7 @@ public class UIFactory : MonoBehaviour
 		button.interactable = true;
 		button.onClick.AddListener (eventListner);
 
-		// Button animation
+		// Button states
 		// http://answers.unity3d.com/questions/792008/how-to-change-normal-color-highlighted-color-etc-i.html
 		button.transition = Selectable.Transition.ColorTint;
 		ColorBlock cb = button.colors;
