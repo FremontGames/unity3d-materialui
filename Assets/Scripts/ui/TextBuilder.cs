@@ -9,7 +9,7 @@ public class TextBuilder
 	float _y = 0;
 	float _w = 160;
 	float _h = 50;
-	string _text = "Hello";
+	string _text = "Text";
 	int _fontSize = 24;
 
 	public GameObject build ()
