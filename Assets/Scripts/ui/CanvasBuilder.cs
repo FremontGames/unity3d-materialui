@@ -6,14 +6,17 @@ public class CanvasBuilder
 {
 	Transform _parent;
 
-	public CanvasBuilder(Transform parent){
+	public CanvasBuilder (Transform parent)
+	{
 		_parent = parent;
 	}
 
-	public GameObject build () {
-		// create the canvas
+	public GameObject build ()
+	{
 		GameObject canvasObject = new GameObject ("Canvas");
+		canvasObject.transform.SetParent (_parent);
 		canvasObject.layer = LayerUI;
+
 		RectTransform canvasTrans = canvasObject.AddComponent<RectTransform> ();
 		// Canvas
 		Canvas canvas = canvasObject.AddComponent<Canvas> ();
@@ -25,12 +28,10 @@ public class CanvasBuilder
 		CanvasScaler canvasScaler = canvasObject.AddComponent<CanvasScaler> ();
 		/*		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPhysicalSize;
 		canvasScaler.physicalUnit = CanvasScaler.Unit.Points;
-*/		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-		canvasScaler.referenceResolution = new Vector2(800, 600);
-
+*/
+		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+		canvasScaler.referenceResolution = new Vector2 (800, 600);
 		GraphicRaycaster canvasRayc = canvasObject.AddComponent<GraphicRaycaster> ();
-
-		canvasObject.transform.SetParent (_parent);
 		return canvasObject;
 	}
 

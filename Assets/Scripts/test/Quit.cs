@@ -13,6 +13,13 @@ public class Quit : MonoBehaviour
 
 	void Start ()
 	{
+		// TRANSITION
+		// http://docs.unity3d.com/ScriptReference/Color.Lerp.html
+		float fadeSpeed = 0.5f;
+		Color lerpedColor = Color.Lerp (Color.white, Color.black, fadeSpeed);
+
+
+
 		GameObject canvas = UIFactory.CreateCanvas (this.transform);
 		GameObject panel = UIFactory.CreatePanel (canvas.transform);
 		UIFactory.CreateText (panel.transform, 0, 100, 160, 50, "Message", 32);

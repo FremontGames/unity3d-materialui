@@ -6,14 +6,15 @@ public class TextBuilder
 {
 	Transform _parent;
 
-	public TextBuilder(Transform parent){
+	public TextBuilder (Transform parent)
+	{
 		_parent = parent;
 	}
-		
-	public GameObject build () {
+
+	public GameObject build ()
+	{
 		GameObject textObject = new GameObject ("Text");
 		textObject.transform.SetParent (_parent);
-
 		textObject.layer = LayerUI;
 
 		RectTransform trans = textObject.AddComponent<RectTransform> ();
@@ -48,26 +49,40 @@ public class TextBuilder
 	string _text = "Hello";
 	int _fontSize = 24;
 
-	public TextBuilder x (float newValue) {
-		_x = newValue; return this;
+	public TextBuilder x (float newValue)
+	{
+		_x = newValue;
+		return this;
 	}
 
-	public TextBuilder y (float newValue) {
-		_y = newValue; return this;
-	}
-	public TextBuilder w (float newValue) {
-		_w = newValue; return this;
-	}
-
-	public TextBuilder h (float newValue) {
-		_h = newValue; return this;
+	public TextBuilder y (float newValue)
+	{
+		_y = newValue;
+		return this;
 	}
 
-	public TextBuilder text (string newValue) {
-		_text = newValue; return this;
+	public TextBuilder w (float newValue)
+	{
+		_w = newValue;
+		return this;
 	}
-	public TextBuilder fontSize (int newValue) {
-		_fontSize = newValue; return this;
+
+	public TextBuilder h (float newValue)
+	{
+		_h = newValue;
+		return this;
+	}
+
+	public TextBuilder text (string newValue)
+	{
+		_text = newValue;
+		return this;
+	}
+
+	public TextBuilder fontSize (int newValue)
+	{
+		_fontSize = newValue;
+		return this;
 	}
 
 }

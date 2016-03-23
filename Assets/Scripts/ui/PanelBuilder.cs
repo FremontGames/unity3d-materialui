@@ -6,14 +6,15 @@ public class PanelBuilder
 {
 	Transform _parent;
 
-	public PanelBuilder(Transform parent){
+	public PanelBuilder (Transform parent)
+	{
 		_parent = parent;
 	}
 
-	public GameObject build () {
+	public GameObject build ()
+	{
 		GameObject panelObject = new GameObject ("Panel");
 		panelObject.transform.SetParent (_parent);
-
 		panelObject.layer = LayerUI;
 
 		RectTransform trans = panelObject.AddComponent<RectTransform> ();
@@ -25,34 +26,50 @@ public class PanelBuilder
 		trans.offsetMax = new Vector2 (0, 0);
 		trans.localPosition = new Vector3 (0, 0, 0);
 		trans.sizeDelta = new Vector2 (0, 0);
-		trans.localScale = new Vector3 (_w, _h, 1.0f);
+		trans.localScale = new Vector3 (_localScale_w, _localScale_h, 1.0f);
 
-		CanvasRenderer renderer = panelObject.AddComponent<CanvasRenderer> ();
-
-		// TRANSITION
-		// http://docs.unity3d.com/ScriptReference/Color.Lerp.html
-		float fadeSpeed = 0.5f;
-		Color lerpedColor = Color.Lerp(Color.white, Color.black, fadeSpeed);
-		renderer.SetColor (lerpedColor);
-
-		Image image = panelObject.AddComponent<Image> ();
-		Texture2D tex = Resources.Load<Texture2D> ("panel_bkg");
-		image.sprite = Sprite.Create (tex, new Rect (0, 0, tex.width, tex.height),
-			new Vector2 (0.5f, 0.5f));
-
+		if (_color != null) {
+			CanvasRenderer renderer = panelObject.AddComponent<CanvasRenderer> ();
+			renderer.SetColor (_color);
+		}
+		if (!string.IsNullOrEmpty (_tex_path)) {
+			Image image = panelObject.AddComponent<Image> ();
+			Texture2D tex = Resources.Load<Texture2D> (_tex_path);
+			image.sprite = Sprite.Create (tex, new Rect (0, 0, tex.width, tex.height),
+				new Vector2 (0.5f, 0.5f));
+		}
 		return panelObject;
 	}
 
 	private const int LayerUI = 5;
 
-	float _w = 1f;
-	float _h = 1f;
+	float _localScale_w = 1f;
+	float _localScale_h = 1f;
+	string _tex_path = "";
+	Color _color = Color.white;
 
-	public PanelBuilder w (float newValue) {
-		_w = newValue; return this;
+	public PanelBuilder localScale_w (float newValue)
+	{
+		_localScale_w = newValue;
+		return this;
 	}
-	public PanelBuilder h (float newValue) {
-		_h = newValue; return this;
+
+	public PanelBuilder localScale_h (float newValue)
+	{
+		_localScale_h = newValue;
+		return this;
+	}
+
+	public PanelBuilder tex_path (string newValue)
+	{
+		_tex_path = newValue;
+		return this;
+	}
+
+	public PanelBuilder color (Color newValue)
+	{
+		_color = newValue;
+		return this;
 	}
 
 }
