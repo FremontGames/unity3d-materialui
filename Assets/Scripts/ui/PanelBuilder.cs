@@ -5,19 +5,16 @@ using UnityEngine.UI;
 public class PanelBuilder
 {
 	Transform _parent;
-
-	public PanelBuilder (Transform parent)
-	{
-		_parent = parent;
-	}
+	float _localScale_w = 1f;
+	float _localScale_h = 1f;
+	string _tex_path = "";
+	Color _color = Color.white;
 
 	public GameObject build ()
 	{
-		GameObject panelObject = new GameObject ("Panel");
-		panelObject.transform.SetParent (_parent);
-		panelObject.layer = LayerUI;
+		GameObject obj = Builder.build (_parent, 5, "Panel");
 
-		RectTransform trans = panelObject.AddComponent<RectTransform> ();
+		RectTransform trans = obj.AddComponent<RectTransform> ();
 		trans.anchorMin = new Vector2 (0, 0);
 		trans.anchorMax = new Vector2 (1, 1);
 		trans.anchoredPosition3D = new Vector3 (0, 0, 0);
@@ -29,46 +26,51 @@ public class PanelBuilder
 		trans.localScale = new Vector3 (_localScale_w, _localScale_h, 1.0f);
 
 		if (_color != null) {
-			CanvasRenderer renderer = panelObject.AddComponent<CanvasRenderer> ();
+			CanvasRenderer renderer = obj.AddComponent<CanvasRenderer> ();
 			renderer.SetColor (_color);
 		}
 		if (!string.IsNullOrEmpty (_tex_path)) {
-			Image image = panelObject.AddComponent<Image> ();
+			Image image = obj.AddComponent<Image> ();
 			Texture2D tex = Resources.Load<Texture2D> (_tex_path);
 			image.sprite = Sprite.Create (tex, new Rect (0, 0, tex.width, tex.height),
 				new Vector2 (0.5f, 0.5f));
 		}
-		return panelObject;
+		return obj;
 	}
 
-	private const int LayerUI = 5;
 
-	float _localScale_w = 1f;
-	float _localScale_h = 1f;
-	string _tex_path = "";
-	Color _color = Color.white;
-
-	public PanelBuilder localScale_w (float newValue)
+	public PanelBuilder parent (Transform parent)
 	{
-		_localScale_w = newValue;
+		_parent = parent;
 		return this;
 	}
 
-	public PanelBuilder localScale_h (float newValue)
+
+
+	public PanelBuilder localScale_w (float obj)
 	{
-		_localScale_h = newValue;
+		_localScale_w = obj;
 		return this;
 	}
 
-	public PanelBuilder tex_path (string newValue)
+
+	public PanelBuilder localScale_h (float obj)
 	{
-		_tex_path = newValue;
+		_localScale_h = obj;
 		return this;
 	}
 
-	public PanelBuilder color (Color newValue)
+
+	public PanelBuilder tex_path (string obj)
 	{
-		_color = newValue;
+		_tex_path = obj;
+		return this;
+	}
+
+
+	public PanelBuilder color (Color obj)
+	{
+		_color = obj;
 		return this;
 	}
 

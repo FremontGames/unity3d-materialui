@@ -2,35 +2,37 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class CanvasBuilder : Builder
+public class CanvasBuilder
 {
-	public CanvasBuilder (Transform t) : base(t){ }
+	Transform _parent;
 
 	public GameObject build ()
 	{
-		GameObject canvasObject = new GameObject ("Canvas");
-		canvasObject.transform.SetParent (_parent);
-		canvasObject.layer = LayerUI;
+		GameObject obj = Builder.build (_parent, 5, "Canvas");
 
-		RectTransform canvasTrans = canvasObject.AddComponent<RectTransform> ();
+		RectTransform canvasTrans = obj.AddComponent<RectTransform> ();
 		// Canvas
-		Canvas canvas = canvasObject.AddComponent<Canvas> ();
+		Canvas canvas = obj.AddComponent<Canvas> ();
 		// http://docs.unity3d.com/Manual/UICanvas.html
 		canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 		canvas.pixelPerfect = true;
 		// Canvas Scaler
 		// http://docs.unity3d.com/ScriptReference/UI.CanvasScaler.html
-		CanvasScaler canvasScaler = canvasObject.AddComponent<CanvasScaler> ();
+		CanvasScaler canvasScaler = obj.AddComponent<CanvasScaler> ();
 		/*		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPhysicalSize;
 		canvasScaler.physicalUnit = CanvasScaler.Unit.Points;
 */
 		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
 		canvasScaler.referenceResolution = new Vector2 (800, 600);
-		GraphicRaycaster canvasRayc = canvasObject.AddComponent<GraphicRaycaster> ();
-		return canvasObject;
+		GraphicRaycaster canvasRayc = obj.AddComponent<GraphicRaycaster> ();
+		return obj;
 	}
 
-	private const int LayerUI = 5;
+
+	public CanvasBuilder parent(Transform obj)
+	{
+		_parent = obj; return this;
+	}
 
 }
 

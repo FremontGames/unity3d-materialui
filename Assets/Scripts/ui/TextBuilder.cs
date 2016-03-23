@@ -5,19 +5,18 @@ using UnityEngine.UI;
 public class TextBuilder
 {
 	Transform _parent;
-
-	public TextBuilder (Transform parent)
-	{
-		_parent = parent;
-	}
+	float _x = 0;
+	float _y = 0;
+	float _w = 160;
+	float _h = 50;
+	string _text = "Hello";
+	int _fontSize = 24;
 
 	public GameObject build ()
 	{
-		GameObject textObject = new GameObject ("Text");
-		textObject.transform.SetParent (_parent);
-		textObject.layer = LayerUI;
+		GameObject obj = Builder.build (_parent, 5, "Text");
 
-		RectTransform trans = textObject.AddComponent<RectTransform> ();
+		RectTransform trans = obj.AddComponent<RectTransform> ();
 		trans.sizeDelta.Set (_w, _h);
 		// http://docs.unity3d.com/ScriptReference/Vector3.html
 		trans.anchoredPosition3D = new Vector3 (0, 0, 0);
@@ -26,9 +25,9 @@ public class TextBuilder
 		trans.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
 		trans.localPosition.Set (0, 0, 0);
 
-		CanvasRenderer renderer = textObject.AddComponent<CanvasRenderer> ();
+		CanvasRenderer renderer = obj.AddComponent<CanvasRenderer> ();
 
-		Text text = textObject.AddComponent<Text> ();
+		Text text = obj.AddComponent<Text> ();
 		text.supportRichText = true;
 		text.text = _text;
 		text.fontSize = _fontSize;
@@ -37,51 +36,49 @@ public class TextBuilder
 		text.horizontalOverflow = HorizontalWrapMode.Overflow;
 		text.color = new Color (0, 0, 1);
 
-		return textObject;
+		return obj;
 	}
 
-	private const int LayerUI = 5;
 
-	float _x = 0;
-	float _y = 0;
-	float _w = 160;
-	float _h = 50;
-	string _text = "Hello";
-	int _fontSize = 24;
-
-	public TextBuilder x (float newValue)
+	public TextBuilder parent(Transform parent)
 	{
-		_x = newValue;
+		_parent = parent;
 		return this;
 	}
 
-	public TextBuilder y (float newValue)
+	public TextBuilder x (float obj)
 	{
-		_y = newValue;
+		_x = obj;
 		return this;
 	}
 
-	public TextBuilder w (float newValue)
+	public TextBuilder y (float obj)
 	{
-		_w = newValue;
+		_y = obj;
 		return this;
 	}
 
-	public TextBuilder h (float newValue)
+	public TextBuilder w (float obj)
 	{
-		_h = newValue;
+		_w = obj;
 		return this;
 	}
 
-	public TextBuilder text (string newValue)
+	public TextBuilder h (float obj)
 	{
-		_text = newValue;
+		_h = obj;
 		return this;
 	}
 
-	public TextBuilder fontSize (int newValue)
+	public TextBuilder text (string obj)
 	{
-		_fontSize = newValue;
+		_text = obj;
+		return this;
+	}
+
+	public TextBuilder fontSize (int obj)
+	{
+		_fontSize = obj;
 		return this;
 	}
 
