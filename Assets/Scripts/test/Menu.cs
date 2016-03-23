@@ -33,10 +33,23 @@ public class Menu : MonoBehaviour
 		new ButtonBuilder()
 			.parent  (panel.transform)
 			.y(-100)
-			.text("Choose a demo")
+			.text("Quit")
 			.onClick(delegate {
 				quit ();
 			})
+			.build ();
+		new ButtonBuilder()
+			.parent  (panel.transform)
+			.y(-200)
+			.text("Editor")
+			.onClick(delegate {
+				editor ();
+			})
+			.build ();
+		new ButtonBuilder()
+			.parent  (panel.transform)
+			.y(-300)
+			.text("Map")
 			.build ();
 
 		// BUI_Modal(this,
@@ -49,18 +62,6 @@ public class Menu : MonoBehaviour
 		//			BUI_Button.text("Map")
 		//		)
 		//	);
-		/*
-		UIFactory.CreateButton (panel.transform, 0, -100, 300, 70, "Quit", delegate {
-			quit ();
-		});
-		*/
-		UIFactory.CreateButton (panel.transform, 0, -200, 300, 70, "Editor", delegate {
-			editor ();
-		});
-		UIFactory.CreateButton (panel.transform, 0, -300, 300, 70, "Map", delegate {
-
-		});
-
 	}
 
 	// PRESENTER

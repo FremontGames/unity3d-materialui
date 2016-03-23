@@ -51,12 +51,12 @@ public class ButtonBuilder
 		cb.colorMultiplier = 1f;
 		cb.fadeDuration = 0.1f;
 		button.colors = cb;
-/*
-		new ButtonBuilder ()
+
+		new TextBuilder ()
 			.parent (obj.transform)
 			.text (_text)
 			.build ();
-*/
+
 		return obj;
 	}
 
