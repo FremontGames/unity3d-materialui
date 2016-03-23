@@ -2,14 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class CanvasBuilder
+public class CanvasBuilder : Builder
 {
-	Transform _parent;
-
-	public CanvasBuilder (Transform parent)
-	{
-		_parent = parent;
-	}
+	public CanvasBuilder (Transform t) : base(t){ }
 
 	public GameObject build ()
 	{

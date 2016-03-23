@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Builder
 {
-	Transform _parent;
+	protected Transform _parent;
 
 	public Builder (Transform parent)
 	{

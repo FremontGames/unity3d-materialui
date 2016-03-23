@@ -12,11 +12,20 @@ public class Menu : MonoBehaviour
 
 	void Start ()
 	{
-		GameObject canvas = new CanvasBuilder (this.transform).build ();
-		GameObject panel = new PanelBuilder (canvas.transform).tex_path("panel_bkg").build ();
-		TextBuilder text = new TextBuilder (panel.transform);
-		text.y (100).text ("Tests").fontSize (32).build ();
-		text.y (0).text ("Choose a demo").fontSize (24).build ();
+		GameObject canvas = new CanvasBuilder (this.transform)
+			.build ();
+		GameObject panel = new PanelBuilder (canvas.transform)
+			.tex_path ("panel_bkg")
+			.build ();
+		new TextBuilder (panel.transform)
+			.y (100)
+			.text ("Tests")
+			.fontSize (32)
+			.build ();
+		new TextBuilder (panel.transform)
+			.y (0)
+			.text ("Choose a demo")
+			.build ();
 
 		// BUI_Modal(this,
 		//		BUI_PageHeader(
