@@ -52,7 +52,7 @@ public class ButtonBuilder
 		cb.fadeDuration = 0.1f;
 		button.colors = cb;
 
-		new TextBuilder ()
+		TextBuilder
 			.parent (obj.transform)
 			.text (_text)
 			.build ();
@@ -89,18 +89,19 @@ public class ButtonBuilder
 		Vector2 currSize = trans.rect.size;
 		Vector2 sizeDiff = size - currSize;
 		trans.offsetMin = trans.offsetMin -
-			new Vector2 (sizeDiff.x * trans.pivot.x,
-				sizeDiff.y * trans.pivot.y);
+		new Vector2 (sizeDiff.x * trans.pivot.x,
+			sizeDiff.y * trans.pivot.y);
 		trans.offsetMax = trans.offsetMax +
-			new Vector2 (sizeDiff.x * (1.0f - trans.pivot.x),
-				sizeDiff.y * (1.0f - trans.pivot.y));
+		new Vector2 (sizeDiff.x * (1.0f - trans.pivot.x),
+			sizeDiff.y * (1.0f - trans.pivot.y));
 	}
 
 
-	public ButtonBuilder parent(Transform parent)
+	public static ButtonBuilder parent (Transform obj)
 	{
-		_parent = parent;
-		return this;
+		ButtonBuilder b = new ButtonBuilder ();
+		b._parent = obj;
+		return b;
 	}
 
 	public ButtonBuilder x (float obj)
@@ -132,6 +133,7 @@ public class ButtonBuilder
 		_text = obj;
 		return this;
 	}
+
 	public ButtonBuilder onClick (UnityAction obj)
 	{
 		_onClick = obj;

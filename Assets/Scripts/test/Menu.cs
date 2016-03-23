@@ -12,44 +12,44 @@ public class Menu : MonoBehaviour
 
 	void Start ()
 	{
-		GameObject canvas = new CanvasBuilder ()
-			.parent(this.transform)
+		GameObject canvas = CanvasBuilder
+			.parent (this.transform)
 			.build ();
-		GameObject panel = new PanelBuilder()
+		GameObject panel = PanelBuilder
 			.parent (canvas.transform)
-			.tex_path("panel_bkg")
+			.tex_path ("panel_bkg")
 			.build ();
-		new TextBuilder()
-			.parent  (panel.transform)
-			.y(100)
-			.text("Tests")
-			.fontSize(32)
+		TextBuilder
+			.parent (panel.transform)
+			.y (100)
+			.text ("Tests")
+			.fontSize (32)
 			.build ();
-		new TextBuilder()
-			.parent  (panel.transform)
-			.y(0)
-			.text("Choose a demo")
+		TextBuilder
+			.parent (panel.transform)
+			.y (0)
+			.text ("Choose a demo")
 			.build ();
-		new ButtonBuilder()
-			.parent  (panel.transform)
-			.y(-100)
-			.text("Quit")
-			.onClick(delegate {
-				quit ();
-			})
+		ButtonBuilder
+			.parent (panel.transform)
+			.y (-100)
+			.text ("Quit")
+			.onClick (delegate {
+			quit ();
+		})
 			.build ();
-		new ButtonBuilder()
-			.parent  (panel.transform)
-			.y(-200)
-			.text("Editor")
-			.onClick(delegate {
-				editor ();
-			})
+		ButtonBuilder
+			.parent (panel.transform)
+			.y (-200)
+			.text ("Editor")
+			.onClick (delegate {
+			editor ();
+		})
 			.build ();
-		new ButtonBuilder()
-			.parent  (panel.transform)
-			.y(-300)
-			.text("Map")
+		ButtonBuilder
+			.parent (panel.transform)
+			.y (-300)
+			.text ("Map")
 			.build ();
 
 		// BUI_Modal(this,

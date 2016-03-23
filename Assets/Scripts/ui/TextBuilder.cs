@@ -40,10 +40,11 @@ public class TextBuilder
 	}
 
 
-	public TextBuilder parent(Transform parent)
+	public static TextBuilder parent(Transform obj)
 	{
-		_parent = parent;
-		return this;
+		TextBuilder b = new TextBuilder ();
+		b._parent = obj;
+		return b;
 	}
 
 	public TextBuilder x (float obj)

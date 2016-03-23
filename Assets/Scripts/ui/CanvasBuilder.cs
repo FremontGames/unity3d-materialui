@@ -10,7 +10,8 @@ public class CanvasBuilder
 	{
 		GameObject obj = Builder.build (_parent, 5, "Canvas");
 
-		RectTransform canvasTrans = obj.AddComponent<RectTransform> ();
+		// RectTransform canvasTrans = obj.AddComponent<RectTransform> ();
+
 		// Canvas
 		Canvas canvas = obj.AddComponent<Canvas> ();
 		// http://docs.unity3d.com/Manual/UICanvas.html
@@ -24,15 +25,17 @@ public class CanvasBuilder
 */
 		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
 		canvasScaler.referenceResolution = new Vector2 (800, 600);
-		GraphicRaycaster canvasRayc = obj.AddComponent<GraphicRaycaster> ();
+		obj.AddComponent<GraphicRaycaster> ();
 		return obj;
 	}
 
-
-	public CanvasBuilder parent(Transform obj)
+	public static CanvasBuilder parent (Transform obj)
 	{
-		_parent = obj; return this;
+		CanvasBuilder b = new CanvasBuilder ();
+		b._parent = obj;
+		return b;
 	}
+
 
 }
 

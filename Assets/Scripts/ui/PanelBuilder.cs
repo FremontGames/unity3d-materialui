@@ -37,15 +37,13 @@ public class PanelBuilder
 		}
 		return obj;
 	}
-
-
-	public PanelBuilder parent (Transform parent)
+		
+	public static PanelBuilder parent(Transform obj)
 	{
-		_parent = parent;
-		return this;
+		PanelBuilder b = new PanelBuilder ();
+		b._parent = obj;
+		return b;
 	}
-
-
 
 	public PanelBuilder localScale_w (float obj)
 	{
