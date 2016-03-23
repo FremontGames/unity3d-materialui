@@ -25,7 +25,7 @@ public class PanelBuilder
 		trans.offsetMax = new Vector2 (0, 0);
 		trans.localPosition = new Vector3 (0, 0, 0);
 		trans.sizeDelta = new Vector2 (0, 0);
-		trans.localScale = new Vector3 (0.8f, 0.8f, 1.0f);
+		trans.localScale = new Vector3 (_w, _h, 1.0f);
 
 		CanvasRenderer renderer = panelObject.AddComponent<CanvasRenderer> ();
 
@@ -44,6 +44,16 @@ public class PanelBuilder
 	}
 
 	private const int LayerUI = 5;
+
+	float _w = 1f;
+	float _h = 1f;
+
+	public PanelBuilder w (float newValue) {
+		_w = newValue; return this;
+	}
+	public PanelBuilder h (float newValue) {
+		_h = newValue; return this;
+	}
 
 }
 
