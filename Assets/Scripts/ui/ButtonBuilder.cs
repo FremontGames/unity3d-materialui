@@ -14,6 +14,7 @@ public class ButtonBuilder
 	float _w = 300;
 	float _h = 70;
 	string _text = "Button";
+	string _texture = "button_bkg";
 	UnityAction _onClick = delegate {
 		
 	};
@@ -31,26 +32,49 @@ public class ButtonBuilder
 
 		CanvasRenderer renderer = obj.AddComponent<CanvasRenderer> ();
 
-		// Image
-		Image image = obj.AddComponent<Image> ();
-		init (image, "button_bkg");
-
 		// Button Script
 		Button button = obj.AddComponent<Button> ();
 		button.interactable = true;
 		button.onClick.AddListener (_onClick);
 
+		Image image = obj.AddComponent<Image> ();
+
+		if (!string.IsNullOrEmpty (_texture)) {
+			Texture2D tex = Resources.Load<Texture2D> (_texture);
+
+			// IF scliced
+			// http://docs.unity3d.com/ScriptReference/Sprite.Create.html
+			float pixelsPerUnit = 100.0f;
+			uint extrude = 0;
+			SpriteMeshType meshType = SpriteMeshType.Tight;
+			// http://docs.unity3d.com/450/Documentation/ScriptReference/Sprite-border.html
+			// Vector4 border = Vector4.zero;
+			// http://docs.unity3d.com/ScriptReference/Vector4.html
+			Vector4 border = new Vector4 (10, 10, 10, 10);
+			image.type = Image.Type.Sliced;
+
+			// ELSE
+			// image.type = Image.Type.Simple;
+
+			image.sprite = Sprite.Create (tex, new Rect (0, 0, tex.width, tex.height),
+				new Vector2 (0.5f, 0.5f), pixelsPerUnit, extrude, meshType, 
+				border);		
+			
+		}
+
 		// Button states
-		// http://answers.unity3d.com/questions/792008/how-to-change-normal-color-highlighted-color-etc-i.html
-		button.transition = Selectable.Transition.ColorTint;
-		ColorBlock cb = button.colors;
-		button.targetGraphic = image;
-		cb.normalColor = Color.grey;
-		cb.highlightedColor = Color.red;
-		cb.pressedColor = Color.green;
-		cb.colorMultiplier = 1f;
-		cb.fadeDuration = 0.1f;
-		button.colors = cb;
+		if (true) {
+			// http://answers.unity3d.com/questions/792008/how-to-change-normal-color-highlighted-color-etc-i.html
+			button.transition = Selectable.Transition.ColorTint;
+			ColorBlock cb = button.colors;
+			button.targetGraphic = image;
+			cb.normalColor = Color.grey;
+			cb.highlightedColor = Color.red;
+			cb.pressedColor = Color.green;
+			cb.colorMultiplier = 1f;
+			cb.fadeDuration = 0.1f;
+			button.colors = cb;
+		}
 
 		TextBuilder
 			.parent (obj.transform)
@@ -59,30 +83,6 @@ public class ButtonBuilder
 
 		return obj;
 	}
-
-	public static  void init (Image image, string resource)
-	{
-		Texture2D tex = Resources.Load<Texture2D> (resource);
-
-		// IF scliced
-		// http://docs.unity3d.com/ScriptReference/Sprite.Create.html
-		float pixelsPerUnit = 100.0f;
-		uint extrude = 0;
-		SpriteMeshType meshType = SpriteMeshType.Tight;
-		// http://docs.unity3d.com/450/Documentation/ScriptReference/Sprite-border.html
-		// Vector4 border = Vector4.zero;
-		// http://docs.unity3d.com/ScriptReference/Vector4.html
-		Vector4 border = new Vector4 (10, 10, 10, 10);
-		image.type = Image.Type.Sliced;
-
-		// ELSE
-		// image.type = Image.Type.Simple;
-
-		image.sprite = Sprite.Create (tex, new Rect (0, 0, tex.width, tex.height),
-			new Vector2 (0.5f, 0.5f), pixelsPerUnit, extrude, meshType, 
-			border);		
-	}
-
 
 	public static void SetSize (RectTransform trans, Vector2 size)
 	{
