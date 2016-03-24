@@ -11,6 +11,7 @@ public class TextBuilder
 	float _h = 50;
 	string _text = "Text";
 	int _fontSize = 24;
+	Color _color = new Color (0, 0, 1);
 
 	public GameObject build ()
 	{
@@ -34,7 +35,7 @@ public class TextBuilder
 		text.font = Resources.GetBuiltinResource (typeof(Font), "Arial.ttf") as Font;
 		text.alignment = TextAnchor.MiddleCenter;
 		text.horizontalOverflow = HorizontalWrapMode.Overflow;
-		text.color = new Color (0, 0, 1);
+		text.color = _color;
 
 		return obj;
 	}
@@ -80,6 +81,11 @@ public class TextBuilder
 	public TextBuilder fontSize (int obj)
 	{
 		_fontSize = obj;
+		return this;
+	}
+	public TextBuilder color (Color obj)
+	{
+		_color = obj;
 		return this;
 	}
 

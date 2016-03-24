@@ -13,12 +13,15 @@ public class ButtonBuilder
 	float _y = 0;
 	float _w = 300;
 	float _h = 70;
-	string _text = "Button";
+
 	string _texture = "button_bkg";
 	Selectable.Transition _transition = Selectable.Transition.ColorTint;
 	Color _normalColor = new Color (255, 255, 255, 1);
 	Color _highlightedColor = new Color (0, 0, 0, 1);
 	Color _pressedColor = Color.grey;
+
+	string _text = "Button";
+	Color _text_color = Color.black;
 
 	UnityAction _onClick = delegate {
 		
@@ -83,7 +86,8 @@ public class ButtonBuilder
 		if (!string.IsNullOrEmpty (_text)) {
 			TextBuilder
 			.parent (obj.transform)
-			.text (_text)
+				.text (_text)
+				.color (_text_color)
 			.build ();
 		}
 		return obj;
@@ -144,11 +148,23 @@ public class ButtonBuilder
 		_texture = obj;
 		return this;
 	}
+	public ButtonBuilder normalColor (Color obj)
+	{
+		_normalColor = obj;
+		return this;
+	}
 
 	public ButtonBuilder onClick (UnityAction obj)
 	{
 		_onClick = obj;
 		return this;
 	}
+
+	public ButtonBuilder text_color (Color obj)
+	{
+		_text_color = obj;
+		return this;
+	}
+
 
 }
