@@ -34,6 +34,7 @@ public class Menu : MonoBehaviour
 			.parent (panel.transform)
 			.y (-100)
 			.text ("Quit")
+			.texture("button_bkg2")
 			.onClick (delegate {
 			quit ();
 		})

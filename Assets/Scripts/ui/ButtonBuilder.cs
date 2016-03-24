@@ -32,10 +32,6 @@ public class ButtonBuilder
 
 		CanvasRenderer renderer = obj.AddComponent<CanvasRenderer> ();
 
-		// Button Script
-		Button button = obj.AddComponent<Button> ();
-		button.interactable = true;
-		button.onClick.AddListener (_onClick);
 
 		Image image = obj.AddComponent<Image> ();
 
@@ -61,6 +57,12 @@ public class ButtonBuilder
 				border);		
 			
 		}
+
+		// Button Script
+		Button button = obj.AddComponent<Button> ();
+		button.interactable = true;
+		button.onClick.AddListener (_onClick);
+
 
 		// Button states
 		if (true) {
@@ -131,6 +133,11 @@ public class ButtonBuilder
 	public ButtonBuilder text (string obj)
 	{
 		_text = obj;
+		return this;
+	}
+	public ButtonBuilder texture (string obj)
+	{
+		_texture = obj;
 		return this;
 	}
 
