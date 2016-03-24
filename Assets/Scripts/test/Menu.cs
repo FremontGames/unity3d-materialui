@@ -51,6 +51,16 @@ public class Menu : MonoBehaviour
 			.y (-300)
 			.text ("Map")
 			.build ();
+		ButtonBuilder
+			.parent (panel.transform)
+			.y (-400)
+			.text ("Score")
+			.build ();
+		ButtonBuilder
+			.parent (panel.transform)
+			.y (-500)
+			.text ("News")
+			.build ();
 
 		// BUI_Modal(this,
 		//		BUI_PageHeader(
