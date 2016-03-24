@@ -15,6 +15,11 @@ public class ButtonBuilder
 	float _h = 70;
 	string _text = "Button";
 	string _texture = "button_bkg";
+	Selectable.Transition _transition = Selectable.Transition.ColorTint;
+	Color _normalColor = new Color (255, 255, 255, 1);
+	Color _highlightedColor = new Color (0, 0, 0, 1);
+	Color _pressedColor = Color.grey;
+
 	UnityAction _onClick = delegate {
 		
 	};
@@ -54,35 +59,33 @@ public class ButtonBuilder
 
 			image.sprite = Sprite.Create (tex, new Rect (0, 0, tex.width, tex.height),
 				new Vector2 (0.5f, 0.5f), pixelsPerUnit, extrude, meshType, 
-				border);		
-			
+				border);
 		}
-
-		// Button Script
-		Button button = obj.AddComponent<Button> ();
-		button.interactable = true;
-		button.onClick.AddListener (_onClick);
-
-
-		// Button states
-		if (true) {
-			// http://answers.unity3d.com/questions/792008/how-to-change-normal-color-highlighted-color-etc-i.html
-			button.transition = Selectable.Transition.ColorTint;
+		if (_onClick != null) {
+			// Button Script
+			Button button = obj.AddComponent<Button> ();
+			button.interactable = true;
+			button.onClick.AddListener (_onClick);
+			if (_transition != null) {
+				// http://answers.unity3d.com/questions/792008/how-to-change-normal-color-highlighted-color-etc-i.html
+				button.transition = _transition;
+			}
 			ColorBlock cb = button.colors;
 			button.targetGraphic = image;
-			cb.normalColor = Color.grey;
-			cb.highlightedColor = Color.red;
-			cb.pressedColor = Color.green;
+			// http://docs.unity3d.com/ScriptReference/Color32.html
+			cb.normalColor = _normalColor;
+			cb.highlightedColor = _highlightedColor;
+			cb.pressedColor = _pressedColor;
 			cb.colorMultiplier = 1f;
 			cb.fadeDuration = 0.1f;
 			button.colors = cb;
 		}
-
-		TextBuilder
+		if (!string.IsNullOrEmpty (_text)) {
+			TextBuilder
 			.parent (obj.transform)
 			.text (_text)
 			.build ();
-
+		}
 		return obj;
 	}
 
@@ -135,6 +138,7 @@ public class ButtonBuilder
 		_text = obj;
 		return this;
 	}
+
 	public ButtonBuilder texture (string obj)
 	{
 		_texture = obj;
