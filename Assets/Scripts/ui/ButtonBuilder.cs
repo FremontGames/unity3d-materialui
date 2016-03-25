@@ -23,6 +23,9 @@ public class ButtonBuilder
 	string _text = "Button";
 	Color _text_color = Color.black;
 
+	Color _shadow = new Color (50, 50, 50, 1);
+
+
 	UnityAction _onClick = delegate {
 		
 	};
@@ -64,24 +67,38 @@ public class ButtonBuilder
 				new Vector2 (0.5f, 0.5f), pixelsPerUnit, extrude, meshType, 
 				border);
 		}
+
+		// http://docs.unity3d.com/Manual/script-Button.html
+		Button button = obj.AddComponent<Button> ();
+		button.interactable = true;
 		if (_onClick != null) {
-			// Button Script
-			Button button = obj.AddComponent<Button> ();
-			button.interactable = true;
 			button.onClick.AddListener (_onClick);
-			if (_transition != null) {
-				// http://answers.unity3d.com/questions/792008/how-to-change-normal-color-highlighted-color-etc-i.html
-				button.transition = _transition;
+		}
+		if (_transition != null) {
+			// http://docs.unity3d.com/Manual/script-SelectableTransition.html
+			button.transition = _transition;
+			if (_transition == Selectable.Transition.ColorTint) {
+				button.targetGraphic = image;
+				// http://docs.unity3d.com/ScriptReference/Color32.html
+				ColorBlock cb = button.colors;
+				cb.normalColor = _normalColor;
+				cb.highlightedColor = _highlightedColor;
+				cb.pressedColor = _pressedColor;
+				cb.colorMultiplier = 1f;
+				cb.fadeDuration = 0.1f;
+				button.colors = cb;
 			}
-			ColorBlock cb = button.colors;
-			button.targetGraphic = image;
-			// http://docs.unity3d.com/ScriptReference/Color32.html
-			cb.normalColor = _normalColor;
-			cb.highlightedColor = _highlightedColor;
-			cb.pressedColor = _pressedColor;
-			cb.colorMultiplier = 1f;
-			cb.fadeDuration = 0.1f;
-			button.colors = cb;
+		}
+
+
+		// TODO notif
+
+		if (_shadow != null) {
+			// http://docs.unity3d.com/Manual/script-Shadow.html
+			// http://docs.unity3d.com/460/Documentation/ScriptReference/UI.Shadow.html
+			Shadow shadow = obj.AddComponent<Shadow> ();
+			shadow.effectColor = _shadow;
+			shadow.effectDistance = new Vector2 (5, -5);
 		}
 		if (!string.IsNullOrEmpty (_text)) {
 			TextBuilder
@@ -148,6 +165,7 @@ public class ButtonBuilder
 		_texture = obj;
 		return this;
 	}
+
 	public ButtonBuilder normalColor (Color obj)
 	{
 		_normalColor = obj;
