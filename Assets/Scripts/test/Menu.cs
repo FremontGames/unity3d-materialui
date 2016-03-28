@@ -9,9 +9,94 @@ using UnityEngine.Events;
 public class Menu : MonoBehaviour
 {
 	// VIEW
+	public float gridX = 50f;
+	public float gridY = 50f;
+	public float spacing = 20f;
+
+	string _texture = "button_bkg2";
+
 
 	void Start ()
 	{
+		// TODO instanciate
+		// TODO apply scaler
+		// TODO apply theme
+		// TODO apply event to button id
+
+
+		// http://docs.unity3d.com/ScriptReference/Resources.Load.html
+		Object res = Resources.Load("prefab", typeof(GameObject));
+		// http://docs.unity3d.com/ScriptReference/Object.Instantiate.html
+		GameObject go = Instantiate(res) as GameObject;
+		// GameObject go = Instantiate(res, pos, Quaternion.identity) as GameObject;
+		Image[] buttons = go.GetComponentsInChildren<Image> ();
+			for (int i = 0; i < buttons.Length; i++) {
+			Image image = buttons[i];
+
+			if (!string.IsNullOrEmpty (_texture)) {
+				Texture2D tex = Resources.Load<Texture2D> (_texture);
+
+				// IF scliced
+				// http://docs.unity3d.com/ScriptReference/Sprite.Create.html
+				float pixelsPerUnit = 100.0f;
+				uint extrude = 0;
+				SpriteMeshType meshType = SpriteMeshType.Tight;
+				// http://docs.unity3d.com/450/Documentation/ScriptReference/Sprite-border.html
+				// Vector4 border = Vector4.zero;
+				// http://docs.unity3d.com/ScriptReference/Vector4.html
+				Vector4 border = new Vector4 (10, 10, 10, 10);
+				image.type = Image.Type.Sliced;
+
+				// ELSE
+				// image.type = Image.Type.Simple;
+
+				image.sprite = Sprite.Create (tex, new Rect (0, 0, tex.width, tex.height),
+					new Vector2 (0.5f, 0.5f), pixelsPerUnit, extrude, meshType, 
+					border);
+			}
+
+
+
+			}
+
+
+		/*
+		// http://docs.unity3d.com/Manual/Prefabs.html
+		// http://docs.unity3d.com/Manual/InstantiatingPrefabs.html
+		for (int y = 0; y < gridY; y++) {
+			for (int x = 0; x < gridX; x++) {
+				Vector3 pos = new Vector3(x, y, 0) * spacing;
+
+				// http://docs.unity3d.com/ScriptReference/Resources.Load.html
+				Object res = Resources.Load("subprefab", typeof(GameObject));
+				// http://docs.unity3d.com/ScriptReference/Object.Instantiate.html
+				GameObject go = Instantiate(res) as GameObject;
+				// GameObject go = Instantiate(res, pos, Quaternion.identity) as GameObject;
+				go.transform.SetParent(this.transform);
+
+				go.GetComponentInChildren<Button> ().transform.localPosition = pos;
+				// text.text = "Toto"+x+y;
+
+
+
+				GameObject canvas = CanvasBuilder
+					.parent (this.transform)
+					.build ();
+
+				ButtonBuilder
+					.parent (canvas.transform)
+					.y (y * spacing)
+					.x (x * spacing)
+					.text ("Quit")
+					.text_color (Color.white)
+					.texture ("button_bkg2")
+					.normalColor (Color.blue)
+					.build ();
+				
+			}
+		}
+		*/
+		/*
 		GameObject canvas = CanvasBuilder
 			.parent (this.transform)
 			.build ();
@@ -64,7 +149,7 @@ public class Menu : MonoBehaviour
 			.y (-500)
 			.text ("News")
 			.build ();
-
+*/
 		// BUI_Modal(this,
 		//		BUI_PageHeader(
 		//		  	BUI_Text.text("Test").subtext("Choose a demo")
