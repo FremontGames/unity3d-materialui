@@ -13,51 +13,75 @@ public class Menu : MonoBehaviour
 	public float gridY = 50f;
 	public float spacing = 20f;
 
-	string _texture = "button_bkg2";
 
+	void texture(Image image, string _texture) {
+		if (!string.IsNullOrEmpty (_texture)) {
+			Texture2D tex = Resources.Load<Texture2D> (_texture);
+
+			// IF scliced
+			// http://docs.unity3d.com/ScriptReference/Sprite.Create.html
+			float pixelsPerUnit = 100.0f;
+			uint extrude = 0;
+			SpriteMeshType meshType = SpriteMeshType.Tight;
+			// http://docs.unity3d.com/450/Documentation/ScriptReference/Sprite-border.html
+			// Vector4 border = Vector4.zero;
+			// http://docs.unity3d.com/ScriptReference/Vector4.html
+			Vector4 border = new Vector4 (10, 10, 10, 10);
+			image.type = Image.Type.Sliced;
+
+			// ELSE
+			// image.type = Image.Type.Simple;
+
+			image.sprite = Sprite.Create (tex, new Rect (0, 0, tex.width, tex.height),
+				new Vector2 (0.5f, 0.5f), pixelsPerUnit, extrude, meshType, 
+				border);
+		}
+
+	}
+
+	void theme(GameObject go) {
+		Image[] buttons = go.GetComponentsInChildren<Image> ();
+		for (int i = 0; i < buttons.Length; i++) {
+			Image image = buttons[i];
+			texture (image, "button_bkg");
+
+		}
+	}
+
+	void scaler(GameObject obj) {
+		Canvas canvas = obj.AddComponent<Canvas> ();
+		// http://docs.unity3d.com/Manual/UICanvas.html
+		canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+		canvas.pixelPerfect = true;
+		// Canvas Scaler
+		// http://docs.unity3d.com/ScriptReference/UI.CanvasScaler.html
+		CanvasScaler canvasScaler = obj.AddComponent<CanvasScaler> ();
+		/*		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPhysicalSize;
+		canvasScaler.physicalUnit = CanvasScaler.Unit.Points;
+*/
+		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+		canvasScaler.referenceResolution = new Vector2 (800, 600);
+		canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Shrink;
+		obj.AddComponent<GraphicRaycaster> ();
+
+	}
 
 	void Start ()
 	{
 		// TODO instanciate
-		// TODO apply scaler
-		// TODO apply theme
-		// TODO apply event to button id
-
-
 		// http://docs.unity3d.com/ScriptReference/Resources.Load.html
 		Object res = Resources.Load("prefab", typeof(GameObject));
 		// http://docs.unity3d.com/ScriptReference/Object.Instantiate.html
 		GameObject go = Instantiate(res) as GameObject;
 		// GameObject go = Instantiate(res, pos, Quaternion.identity) as GameObject;
-		Image[] buttons = go.GetComponentsInChildren<Image> ();
-			for (int i = 0; i < buttons.Length; i++) {
-			Image image = buttons[i];
 
-			if (!string.IsNullOrEmpty (_texture)) {
-				Texture2D tex = Resources.Load<Texture2D> (_texture);
+		// TODO apply scaler
+		scaler(go);
 
-				// IF scliced
-				// http://docs.unity3d.com/ScriptReference/Sprite.Create.html
-				float pixelsPerUnit = 100.0f;
-				uint extrude = 0;
-				SpriteMeshType meshType = SpriteMeshType.Tight;
-				// http://docs.unity3d.com/450/Documentation/ScriptReference/Sprite-border.html
-				// Vector4 border = Vector4.zero;
-				// http://docs.unity3d.com/ScriptReference/Vector4.html
-				Vector4 border = new Vector4 (10, 10, 10, 10);
-				image.type = Image.Type.Sliced;
+		// TODO apply theme
+		theme(go);
 
-				// ELSE
-				// image.type = Image.Type.Simple;
-
-				image.sprite = Sprite.Create (tex, new Rect (0, 0, tex.width, tex.height),
-					new Vector2 (0.5f, 0.5f), pixelsPerUnit, extrude, meshType, 
-					border);
-			}
-
-
-
-			}
+		// TODO apply event to button id
 
 
 		/*
