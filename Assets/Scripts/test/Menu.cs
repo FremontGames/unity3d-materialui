@@ -8,89 +8,6 @@ using UnityEngine.Events;
 
 public class Menu : MonoBehaviour
 {
-	// VIEW
-	public float gridX = 50f;
-	public float gridY = 50f;
-	public float spacing = 20f;
-
-
-	void texture(Image image, string _texture) {
-		if (!string.IsNullOrEmpty (_texture)) {
-			Texture2D tex = Resources.Load<Texture2D> (_texture);
-
-			// IF scliced
-			// http://docs.unity3d.com/ScriptReference/Sprite.Create.html
-			float pixelsPerUnit = 100.0f;
-			uint extrude = 0;
-			SpriteMeshType meshType = SpriteMeshType.Tight;
-			// http://docs.unity3d.com/450/Documentation/ScriptReference/Sprite-border.html
-			// Vector4 border = Vector4.zero;
-			// http://docs.unity3d.com/ScriptReference/Vector4.html
-			Vector4 border = new Vector4 (10, 10, 10, 10);
-			image.type = Image.Type.Sliced;
-
-			// ELSE
-			// image.type = Image.Type.Simple;
-
-			image.sprite = Sprite.Create (tex, new Rect (0, 0, tex.width, tex.height),
-				new Vector2 (0.5f, 0.5f), pixelsPerUnit, extrude, meshType, 
-				border);
-		}
-
-	}
-
-	void theme(GameObject go) {
-		Image[] images = go.GetComponentsInChildren<Image> ();
-		Debug.Log (images);
-		for (int i = 0; i < images.Length; i++) {
-			Image image = images[i];
-			texture (image, "button_bkg2");
-		}
-		Button[] buttons = go.GetComponentsInChildren<Button> ();
-		for (int i = 0; i < buttons.Length; i++) {
-			Button button = buttons[i];
-
-			button.transition = _transition;
-			if (_transition == Selectable.Transition.ColorTint) {
-//				button.targetGraphic = image;
-				// http://docs.unity3d.com/ScriptReference/Color32.html
-				ColorBlock cb = button.colors;
-				cb.normalColor = _normalColor;
-				cb.highlightedColor = _highlightedColor;
-				cb.pressedColor = _pressedColor;
-				cb.colorMultiplier = 1f;
-				cb.fadeDuration = 0.1f;
-				button.colors = cb;
-			}
-		}
-	}
-
-	Selectable.Transition _transition = Selectable.Transition.ColorTint;
-	Color _normalColor = new Color (255, 255, 255, 1);
-	Color _highlightedColor = new Color (0, 0, 0, 1);
-	Color _pressedColor = Color.grey;
-
-
-	void scaler(GameObject obj) {
-		if (obj.GetComponent<Canvas> () == null) {
-			
-			Canvas canvas = obj.AddComponent<Canvas> ();
-			// http://docs.unity3d.com/Manual/UICanvas.html
-			canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-			canvas.pixelPerfect = true;
-			// Canvas Scaler
-			// http://docs.unity3d.com/ScriptReference/UI.CanvasScaler.html
-			CanvasScaler canvasScaler = obj.AddComponent<CanvasScaler> ();
-			/*		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPhysicalSize;
-		canvasScaler.physicalUnit = CanvasScaler.Unit.Points;
-*/
-			canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-			canvasScaler.referenceResolution = new Vector2 (800, 600);
-			canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Shrink;
-			obj.AddComponent<GraphicRaycaster> ();
-		}
-	}
-
 	void Start ()
 	{
 		// TODO instanciate
@@ -103,8 +20,19 @@ public class Menu : MonoBehaviour
 		// TODO apply scaler
 		scaler(go);
 
-		// TODO apply theme
-		theme(go);
+		// TODO apply
+		int size = go.transform.childCount;
+		for (int i = 0; i < size; i++) {
+			Transform child = go.transform.GetChild(i);
+			string name = child.name.ToLower();
+			if(name.Contains("md") ) {
+				if (name.EndsWith("mdbutton")) {
+					// TODO apply theme
+					theme(child.gameObject);
+				}
+			}
+		}
+
 
 		// TODO apply event to button id
 
@@ -210,6 +138,90 @@ public class Menu : MonoBehaviour
 		//		)
 		//	);
 	}
+
+	// VIEW
+	public float gridX = 50f;
+	public float gridY = 50f;
+	public float spacing = 20f;
+
+
+	void texture(Image image, string _texture) {
+		if (!string.IsNullOrEmpty (_texture)) {
+			Texture2D tex = Resources.Load<Texture2D> (_texture);
+
+			// IF scliced
+			// http://docs.unity3d.com/ScriptReference/Sprite.Create.html
+			float pixelsPerUnit = 100.0f;
+			uint extrude = 0;
+			SpriteMeshType meshType = SpriteMeshType.Tight;
+			// http://docs.unity3d.com/450/Documentation/ScriptReference/Sprite-border.html
+			// Vector4 border = Vector4.zero;
+			// http://docs.unity3d.com/ScriptReference/Vector4.html
+			Vector4 border = new Vector4 (10, 10, 10, 10);
+			image.type = Image.Type.Sliced;
+
+			// ELSE
+			// image.type = Image.Type.Simple;
+
+			image.sprite = Sprite.Create (tex, new Rect (0, 0, tex.width, tex.height),
+				new Vector2 (0.5f, 0.5f), pixelsPerUnit, extrude, meshType, 
+				border);
+		}
+
+	}
+
+	void theme(GameObject go) {
+		Image[] images = go.GetComponentsInChildren<Image> ();
+		Debug.Log (images);
+		for (int i = 0; i < images.Length; i++) {
+			Image image = images[i];
+			texture (image, "button_bkg2");
+		}
+		Button[] buttons = go.GetComponentsInChildren<Button> ();
+		for (int i = 0; i < buttons.Length; i++) {
+			Button button = buttons[i];
+
+			button.transition = _transition;
+			if (_transition == Selectable.Transition.ColorTint) {
+				//				button.targetGraphic = image;
+				// http://docs.unity3d.com/ScriptReference/Color32.html
+				ColorBlock cb = button.colors;
+				cb.normalColor = _normalColor;
+				cb.highlightedColor = _highlightedColor;
+				cb.pressedColor = _pressedColor;
+				cb.colorMultiplier = 1f;
+				cb.fadeDuration = 0.1f;
+				button.colors = cb;
+			}
+		}
+	}
+
+	Selectable.Transition _transition = Selectable.Transition.ColorTint;
+	Color _normalColor = new Color (255, 255, 255, 1);
+	Color _highlightedColor = new Color (0, 0, 0, 1);
+	Color _pressedColor = Color.grey;
+
+
+	void scaler(GameObject obj) {
+		if (obj.GetComponent<Canvas> () == null) {
+
+			Canvas canvas = obj.AddComponent<Canvas> ();
+			// http://docs.unity3d.com/Manual/UICanvas.html
+			canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+			canvas.pixelPerfect = true;
+			// Canvas Scaler
+			// http://docs.unity3d.com/ScriptReference/UI.CanvasScaler.html
+			CanvasScaler canvasScaler = obj.AddComponent<CanvasScaler> ();
+			/*		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPhysicalSize;
+		canvasScaler.physicalUnit = CanvasScaler.Unit.Points;
+*/
+			canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+			canvasScaler.referenceResolution = new Vector2 (800, 600);
+			canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Shrink;
+			obj.AddComponent<GraphicRaycaster> ();
+		}
+	}
+
 
 	// PRESENTER
 
