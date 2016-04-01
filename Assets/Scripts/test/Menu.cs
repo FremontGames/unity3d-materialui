@@ -40,37 +40,62 @@ public class Menu : MonoBehaviour
 	}
 
 	void theme(GameObject go) {
-		Image[] buttons = go.GetComponentsInChildren<Image> ();
+		Image[] images = go.GetComponentsInChildren<Image> ();
+		Debug.Log (images);
+		for (int i = 0; i < images.Length; i++) {
+			Image image = images[i];
+			texture (image, "button_bkg2");
+		}
+		Button[] buttons = go.GetComponentsInChildren<Button> ();
 		for (int i = 0; i < buttons.Length; i++) {
-			Image image = buttons[i];
-			texture (image, "button_bkg");
+			Button button = buttons[i];
 
+			button.transition = _transition;
+			if (_transition == Selectable.Transition.ColorTint) {
+//				button.targetGraphic = image;
+				// http://docs.unity3d.com/ScriptReference/Color32.html
+				ColorBlock cb = button.colors;
+				cb.normalColor = _normalColor;
+				cb.highlightedColor = _highlightedColor;
+				cb.pressedColor = _pressedColor;
+				cb.colorMultiplier = 1f;
+				cb.fadeDuration = 0.1f;
+				button.colors = cb;
+			}
 		}
 	}
 
+	Selectable.Transition _transition = Selectable.Transition.ColorTint;
+	Color _normalColor = new Color (255, 255, 255, 1);
+	Color _highlightedColor = new Color (0, 0, 0, 1);
+	Color _pressedColor = Color.grey;
+
+
 	void scaler(GameObject obj) {
-		Canvas canvas = obj.AddComponent<Canvas> ();
-		// http://docs.unity3d.com/Manual/UICanvas.html
-		canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-		canvas.pixelPerfect = true;
-		// Canvas Scaler
-		// http://docs.unity3d.com/ScriptReference/UI.CanvasScaler.html
-		CanvasScaler canvasScaler = obj.AddComponent<CanvasScaler> ();
-		/*		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPhysicalSize;
+		if (obj.GetComponent<Canvas> () == null) {
+			
+			Canvas canvas = obj.AddComponent<Canvas> ();
+			// http://docs.unity3d.com/Manual/UICanvas.html
+			canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+			canvas.pixelPerfect = true;
+			// Canvas Scaler
+			// http://docs.unity3d.com/ScriptReference/UI.CanvasScaler.html
+			CanvasScaler canvasScaler = obj.AddComponent<CanvasScaler> ();
+			/*		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPhysicalSize;
 		canvasScaler.physicalUnit = CanvasScaler.Unit.Points;
 */
-		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-		canvasScaler.referenceResolution = new Vector2 (800, 600);
-		canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Shrink;
-		obj.AddComponent<GraphicRaycaster> ();
-
+			canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+			canvasScaler.referenceResolution = new Vector2 (800, 600);
+			canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Shrink;
+			obj.AddComponent<GraphicRaycaster> ();
+		}
 	}
 
 	void Start ()
 	{
 		// TODO instanciate
 		// http://docs.unity3d.com/ScriptReference/Resources.Load.html
-		Object res = Resources.Load("prefab", typeof(GameObject));
+		Object res = Resources.Load("ui_main_prefab", typeof(GameObject));
 		// http://docs.unity3d.com/ScriptReference/Object.Instantiate.html
 		GameObject go = Instantiate(res) as GameObject;
 		// GameObject go = Instantiate(res, pos, Quaternion.identity) as GameObject;
