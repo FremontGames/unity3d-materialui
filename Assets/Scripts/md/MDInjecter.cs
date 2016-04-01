@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class MD : MonoBehaviour
+public class MDInjecter : MonoBehaviour
 {
 
 	// Use this for initialization
@@ -20,7 +20,9 @@ public class MD : MonoBehaviour
 			if(name.Contains("md") ) {
 				if (name.EndsWith("mdbutton")) {
 					// TODO apply theme
-					theme(child.gameObject);
+//					theme(child.gameObject);
+					Debug.Log(name);
+					child.gameObject.AddComponent<SGUIButton>();
 				}
 			}
 		}

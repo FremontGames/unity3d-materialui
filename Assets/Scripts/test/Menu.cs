@@ -16,7 +16,7 @@ public class Menu : MonoBehaviour
 		// http://docs.unity3d.com/ScriptReference/Object.Instantiate.html
 		GameObject view = Instantiate(res) as GameObject;
 		scaler(view);
-		view.AddComponent<MD> ();
+		view.AddComponent<MDInjecter> ();
 
 		// TODO apply event to button id
 
