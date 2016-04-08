@@ -9,21 +9,36 @@ using UnityEngine.Events;
 public class SGUIButton : MonoBehaviour
 {
 
-	// Use this for initialization
-	void Start ()
+	// Use this for initialization (when added script to gameobject)
+	public void Start ()
 	{
-		SetSize (this.transform, new Vector2 (150, 50));
-
-		Image image = this.transform.GetComponent<Image> ();
-		texture (image, "button_bkg2");
-
-		Button button = this.transform.GetComponent<Button> ();
-		transition (button, image, Selectable.Transition.ColorTint);
-		colors (button, Color.blue, Color.green, Color.red);
-		onClick (button, delegate {
-		});
+		Debug.Log("Start");
+		var trans = this.transform;
+		init (trans);
 	}
 
+	// Use this for initialization (when calling directly))
+	public static void init(Transform trans) {
+		SetSize (trans, new Vector2 (SGUIStyle.width, SGUIStyle.height));
+
+		Image image = trans.GetComponent<Image> ();
+		texture (image, SGUIStyle.texture);
+
+		Button button = trans.GetComponent<Button> ();
+		transition (button, image, Selectable.Transition.ColorTint);
+		colors (button, SGUIStyle.normalColor, SGUIStyle.highlightedColor, SGUIStyle.pressedColor);
+		onClick (button, delegate {
+		});
+
+		var text = trans.GetComponentInChildren<Text> ();
+		localization (text, "fr");
+
+	}
+
+	public static void localization (Text text, string fr)
+	{
+		text.text = "FR";
+	}
 
 	public static void SetSize (Transform t, Vector2 size)
 	{
