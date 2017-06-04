@@ -26,6 +26,10 @@ public class Startup {
             GameObject go2 = new GameObject("Canvas");
             Canvas canvas = go2.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            // SCALE
+            CanvasScaler scaler = go2.AddComponent<CanvasScaler>();
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(800, 600);
 
             GameObjectUtility.SetParentAndAlign(go2, parent);
             parent = go2;

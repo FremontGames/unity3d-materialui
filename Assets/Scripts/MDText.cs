@@ -30,7 +30,7 @@ namespace MDUI
 
         public static void apply(RectTransform comp)
         {
-            SetSize(comp, new Vector2(160, 30));
+            SetSize(comp, new Vector2(260, 100));
         }
 
         [System.Obsolete]
@@ -53,6 +53,11 @@ namespace MDUI
                 txt.fontSize = MDTheme.get().fontSize;
                 txt.color = MDTheme.get().color;
                 txt.fontStyle = MDTheme.get().fontStyle;
+                // SCALE
+                txt.resizeTextForBestFit = true;
+                txt.resizeTextMinSize = 12;
+                txt.resizeTextMaxSize = 40;
+
             }
         }
     }
