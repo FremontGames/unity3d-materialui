@@ -1,44 +1,55 @@
 ﻿// TODO exclude from build
 using UnityEngine;
-
+using UnityEngine.UI;
+using MDUI;
 using UnityEditor;
 
 // http://docs.unity3d.com/Manual/RunningEditorCodeOnLaunch.html
 [InitializeOnLoad]
 public class Startup {
-	static Startup()
+
+    static Startup()
 	{
 		Debug.Log("----------------------------");
 		Debug.Log("EditorStartup:Up and running");
-		EditorApplication.update += Update;
-/*
-		GameObject gameObject = GameObject.Find("Main Camera");
-		if (null == gameObject) {
-			Debug.Log("EditorStartup:gameObject 'Main Camera' must not be null!");
-		}
-		Component script = gameObject.GetComponent<Main2>();
-		if (null == script) {
-			Debug.Log("EditorStartup:setting Main script!");
-			gameObject.AddComponent<Main2> ();
-		}
-*/
 	}
 
-	static void Update ()
-	{
-		Debug.Log("Updating");
-		GameObject obj = GameObject.Find ("menu");
-		if (null != obj) {
-			Debug.Log("menu");
-			// INJECT
-			MDInjecter.preview (obj.transform);
-			// START
-			SGUIButton[] s = obj.GetComponents<SGUIButton>();
-			for (int i = 0; i < s.Length; i++) {
-				Debug.Log("s"+s);
-				s [i].Start();
-			}
-		}
-	}
+    // https://docs.unity3d.com/ScriptReference/MenuItem.html
+
+    [MenuItem("GameObject/UI-MD/Text", false, 10)]
+    static void CreateCustomGameObject(MenuCommand menuCommand)
+    {
+        GameObject parent = Selection.activeTransform != null ? Selection.activeTransform.gameObject : menuCommand.context as GameObject;
+        if(parent==null ||parent.GetComponentInParent<Canvas>() == null)
+        {
+            GameObject go2 = new GameObject("Canvas");
+            Canvas canvas = go2.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+            GameObjectUtility.SetParentAndAlign(go2, parent);
+            parent = go2;
+            // TODO NE PAS CREER DANS TEXT
+        }
+
+        string name = "Text";
+        for(int i = 0;i < parent.transform.childCount; i++)
+        {
+            GameObject child = parent.transform.GetChild(i).gameObject;
+            if (name == child.name)
+                name = name + "(1)";
+            // TODO incrementer
+        }
+
+
+        GameObject go = new GameObject(name);
+        Text text = go.AddComponent<Text>();
+        text.text = "New Text";
+        go.AddComponent<MDText>();
+
+        GameObjectUtility.SetParentAndAlign(go, parent);
+        Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
+        Selection.activeObject = go;
+    }
+
 }
 
