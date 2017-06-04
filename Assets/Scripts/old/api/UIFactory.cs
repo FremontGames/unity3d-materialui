@@ -12,27 +12,36 @@ public class UIFactory : MonoBehaviour
 
 	private const int LayerUI = 5;
 
+	public static GameObject CreateElement (Transform parent, float x, float y, float w, float h)
+	{
+		GameObject c = CreateCanvas (parent);
+		GameObject p = CreatePanel(c.transform);
+		SetSize (p.GetComponent<RectTransform>(), new Vector2 (w, h));
+		p.transform.position = new Vector3 (x+w/2, y+h/2, 0);
+		return c;
+	}
+
 	public static GameObject CreateCanvas (Transform parent)
 	{
 		// create the canvas
 		GameObject canvasObject = new GameObject ("Canvas");
 		canvasObject.layer = LayerUI;
 		RectTransform canvasTrans = canvasObject.AddComponent<RectTransform> ();
+
 		// Canvas
 		Canvas canvas = canvasObject.AddComponent<Canvas> ();
 		// http://docs.unity3d.com/Manual/UICanvas.html
 		canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 		canvas.pixelPerfect = true;
+
 		// Canvas Scaler
 		// http://docs.unity3d.com/ScriptReference/UI.CanvasScaler.html
+		/*
 		CanvasScaler canvasScaler = canvasObject.AddComponent<CanvasScaler> ();
-/*		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPhysicalSize;
-		canvasScaler.physicalUnit = CanvasScaler.Unit.Points;
-*/		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
 		canvasScaler.referenceResolution = new Vector2(800, 600);
-
 		GraphicRaycaster canvasRayc = canvasObject.AddComponent<GraphicRaycaster> ();
-
+		*/
 		canvasObject.transform.SetParent (parent);
 		return canvasObject;
 	}
@@ -60,32 +69,28 @@ public class UIFactory : MonoBehaviour
 	{
 		GameObject panelObject = new GameObject ("Panel");
 		panelObject.transform.SetParent (parent);
-
 		panelObject.layer = LayerUI;
 
 		RectTransform trans = panelObject.AddComponent<RectTransform> ();
 		trans.anchorMin = new Vector2 (0, 0);
 		trans.anchorMax = new Vector2 (1, 1);
-		trans.anchoredPosition3D = new Vector3 (0, 0, 0);
-		trans.anchoredPosition = new Vector2 (0, 0);
 		trans.offsetMin = new Vector2 (0, 0);
 		trans.offsetMax = new Vector2 (0, 0);
-		trans.localPosition = new Vector3 (0, 0, 0);
-		trans.sizeDelta = new Vector2 (0, 0);
-		trans.localScale = new Vector3 (0.8f, 0.8f, 1.0f);
 
+		/*
 		CanvasRenderer renderer = panelObject.AddComponent<CanvasRenderer> ();
-
 		// TRANSITION
 		// http://docs.unity3d.com/ScriptReference/Color.Lerp.html
 		float fadeSpeed = 0.5f;
 		Color lerpedColor = Color.Lerp(Color.white, Color.black, fadeSpeed);
 		renderer.SetColor (lerpedColor);
-
+		*/
 		Image image = panelObject.AddComponent<Image> ();
 		Texture2D tex = Resources.Load<Texture2D> ("panel_bkg");
 		image.sprite = Sprite.Create (tex, new Rect (0, 0, tex.width, tex.height),
 			new Vector2 (0.5f, 0.5f));
+		
+		// panelObject.GetComponent<Renderer> ().material.color = Color.red;
 
 		return panelObject;
 	}
