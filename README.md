@@ -1,42 +1,23 @@
-# unity3d-toolkit
+# Material Design for Unity3D
 
-A comprehensive oriented-programming tool kit for Unity3d. Usefull only for evolving projects with huges commons parts (like same UI for multiple apps, score, ladder, social, account, ads). It can also be used to generate some parts by disabling the destroy behaviour.
+This is the home for the Damien's Material Design components built on top of Unity3D.
 
-RoadMap:
-- home menu
-- main menu
-- settings menu
-- account menu
-- score menu
-- ads full screen
-- ads integrated
-- shop menu
-- theme
-- theme context
-- animation
+#### Quick links
 
-Done:
-- quit menu
-- button
-- message
+### Installation
+
+### Project status
+Angular Material is currently in beta and under active development.
+During beta, new features will be added regularly and APIs will evolve based on user feedback.
+
+#### Feature status
+Note that all "planned" work is tentative / best estimate and is subject to changing priorities.
+
+| Feature          | Status                              | Docs         | Issue          |
+|------------------|-------------------------------------|--------------|----------------|
+| button           |                           Available | [README][1]  |              - |
+| cards            |                           Available | [README][2]  |              - |
 
 
-Included:
-
-- UI
-  - Theme
-- EventBus
-
-Roadmap:
-- UI
-  - Animation
-- Language extension
-  - Logging
-  - Assertions
-  - Date
-  - Transformation
-  - Builder
-- Plateforme
-  - Responsive
-  - ScreenSize
-  - User ID
+ [1]: https://material.angular.io/components/component/button
+ [2]: https://material.angular.io/components/component/card
