@@ -1,4 +1,5 @@
-﻿// TODO exclude from build
+﻿#if (UNITY_EDITOR) 
+// TODO exclude from build
 using UnityEngine;
 using UnityEngine.UI;
 using MDUI;
@@ -52,4 +53,6 @@ public class Startup {
     }
 
 }
+#endif
+
 
