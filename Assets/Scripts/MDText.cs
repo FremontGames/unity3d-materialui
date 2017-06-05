@@ -6,7 +6,7 @@ namespace MDUI
     public class MDText : MonoBehaviour
     {
         // fields visible in Unity3d inspector
-
+        // TODO
 
         // Use this for initialization
         void Start()
