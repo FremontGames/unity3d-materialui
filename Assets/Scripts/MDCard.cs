@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+
 namespace MDUI
 {
     public class MDCard : MonoBehaviour
