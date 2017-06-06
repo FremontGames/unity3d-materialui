@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if (UNITY_EDITOR)
+using UnityEngine;
 using UnityEditor;
 
 namespace MDUI
@@ -30,3 +31,5 @@ namespace MDUI
         }
     }
 }
+
+#endif
