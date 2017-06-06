@@ -26,8 +26,23 @@ public class Startup
             Canvas canvas = go2.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             // SCALE
-            go2.AddComponent<CanvasScaler>();
-            go2.AddComponent<MDContent>();
+            // https://docs.unity3d.com/ScriptReference/SystemInfo-deviceType.html
+            CanvasScaler scaler = go2.AddComponent<CanvasScaler>();
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            if (SystemInfo.deviceType == DeviceType.Handheld)
+                scaler.referenceResolution = new Vector2(640, 960);
+            else if (SystemInfo.deviceType == DeviceType.Desktop)
+                scaler.referenceResolution = new Vector2(1280, 720);
+            else if (SystemInfo.deviceType == DeviceType.Console)
+                scaler.referenceResolution = new Vector2(1920, 1080);
+            else
+            {
+                Debug.LogError("DeviceType is unknown.");
+                scaler.referenceResolution = new Vector2(1024, 1024);
+            }
+            // REFRESH
+            GraphicRaycaster ray = go2.AddComponent<GraphicRaycaster>();
+
             // SET
             GameObjectUtility.SetParentAndAlign(go2, parent);
             parent = go2;
@@ -49,6 +64,20 @@ public class Startup
         return name;
     }
 
+    [MenuItem("GameObject/UI-MD/Layout", false, 10)]
+    static void CreateCustomGameObject_Layout(MenuCommand menuCommand)
+    {
+        GameObject parent = getParent(menuCommand);
+        string name = checkName(parent, "Layout");
+
+        GameObject go = new GameObject(name);
+        go.AddComponent<MDLayout>();
+
+        GameObjectUtility.SetParentAndAlign(go, parent);
+        Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
+        Selection.activeObject = go;
+    }
+
     // https://docs.unity3d.com/ScriptReference/MenuItem.html
     [MenuItem("GameObject/UI-MD/Text", false, 10)]
     static void CreateCustomGameObject_Text(MenuCommand menuCommand)
@@ -65,9 +94,14 @@ public class Startup
         Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
         Selection.activeObject = go;
     }
+    [MenuItem("GameObject/UI-MD/Button/Flat", false, 10)]
+    static void CreateCustomGameObject_Button_Flat(MenuCommand menuCommand)
+    {
 
-    [MenuItem("GameObject/UI-MD/Button", false, 10)]
-    static void CreateCustomGameObject_Button(MenuCommand menuCommand)
+    }
+
+    [MenuItem("GameObject/UI-MD/Button/Raised", false, 10)]
+    static void CreateCustomGameObject_Button_Raised(MenuCommand menuCommand)
     {
         GameObject parent = getParent(menuCommand);
         string name = checkName(parent, "Button");

@@ -2,9 +2,8 @@
 using System.Collections;
 namespace MDUI
 {
-    public class MDStyle : MonoBehaviour
+    public class MDTypographyManager : MonoBehaviour
     {
-        // TODO https://docs.unity3d.com/Manual/editor-CustomEditors.html
 
         // fields visible in Unity3d inspector
         public Font font;
@@ -30,30 +29,17 @@ namespace MDUI
             Start();
         }
 
-        private static MDStyle singleton = null;
-        public static MDStyle get()
+        private static MDTypographyManager singleton = null;
+        public static MDTypographyManager get()
         {
             if (singleton == null)
             {
-                singleton = new MDStyle();
+                singleton = new MDTypographyManager();
                 singleton.Start();
             }
             return singleton;
         }
 
     }
-
-    public class MDTypography
-    {
-        public Font font;
-        public int fontSize;
-        public FontStyle fontStyle;
-
-        public MDTypography(/*Font _font, */int _fontSize, FontStyle _fontStyle)
-        {
-           /* font = _font;*/
-            fontSize = _fontSize;
-            fontStyle = _fontStyle;
-        }
-    }
 }
+

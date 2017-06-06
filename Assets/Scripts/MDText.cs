@@ -49,9 +49,9 @@ namespace MDUI
         {
             if (txt != null)
             {
-                txt.font = MDStyle.get().font;
-                txt.fontSize = MDStyle.get().body1.fontSize;
-                txt.fontStyle = MDStyle.get().body1.fontStyle;
+                txt.font = MDTypographyManager.get().font;
+                txt.fontSize = MDTypographyManager.get().body1.fontSize;
+                txt.fontStyle = MDTypographyManager.get().body1.fontStyle;
                 
                 txt.color = MDTheme.get().color;
                 // SCALE
