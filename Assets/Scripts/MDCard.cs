@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 namespace MDUI
 {
-    public class MDContent : MonoBehaviour
+    public class MDCard : MonoBehaviour
     {
         public bool layoutPadding = true;
 
