@@ -58,7 +58,7 @@ namespace MDUI.Editor
             return parent;
         }
 
-        public static void Text(MenuCommand menuCommand)
+        public static void Setup_Text(MenuCommand menuCommand)
         {
             GameObject parent = getParent(menuCommand);
             string name = checkName(parent, "Text");
@@ -74,12 +74,12 @@ namespace MDUI.Editor
 
         }
 
-        public static void Flat(MenuCommand menuCommand)
+        public static void Setup_Flat(MenuCommand menuCommand)
         {
             // TODO
         }
 
-        public static void Raised(MenuCommand menuCommand)
+        public static void Setup_Raised(MenuCommand menuCommand)
         {
             GameObject parent = getParent(menuCommand);
             string name = checkName(parent, "Button");
@@ -104,7 +104,7 @@ namespace MDUI.Editor
             Selection.activeObject = go;
         }
 
-        public static void Layout(MenuCommand menuCommand)
+        public static void Setup_Layout(MenuCommand menuCommand)
         {
             GameObject parent = getParent(menuCommand);
             string name = checkName(parent, "Layout");

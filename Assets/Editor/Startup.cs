@@ -14,25 +14,25 @@ public class Startup
     [MenuItem("GameObject/UI-MD/Text", false, 1)]
     static void CreateCustomGameObject_Text(MenuCommand menuCommand)
     {
-        MDComponentFactory.Text(menuCommand);
+        MDComponentFactory.Setup_Text(menuCommand);
     }
 
     [MenuItem("GameObject/UI-MD/Button/Flat", false, 2)]
     static void CreateCustomGameObject_Button_Flat(MenuCommand menuCommand)
     {
-        MDComponentFactory.Flat(menuCommand);
+        MDComponentFactory.Setup_Flat(menuCommand);
     }
 
     [MenuItem("GameObject/UI-MD/Button/Raised", false, 3)]
     static void CreateCustomGameObject_Button_Raised(MenuCommand menuCommand)
     {
-        MDComponentFactory.Raised(menuCommand);
+        MDComponentFactory.Setup_Raised(menuCommand);
     }
 
     [MenuItem("GameObject/UI-MD/Layout", false, 4)]
     static void CreateCustomGameObject_Layout(MenuCommand menuCommand)
     {
-        MDComponentFactory.Layout(menuCommand);
+        MDComponentFactory.Setup_Layout(menuCommand);
     }
 
     // TODO add component menu items
