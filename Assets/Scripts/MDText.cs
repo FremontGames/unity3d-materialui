@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using MDUI.Style;
 
-namespace MDUI
+namespace MDUI.Component
 {
     public class MDText : MonoBehaviour
     {

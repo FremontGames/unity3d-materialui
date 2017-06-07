@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MDUI
+namespace MDUI.Style
 {
     [System.Serializable]
     public class MDTypography : System.Object

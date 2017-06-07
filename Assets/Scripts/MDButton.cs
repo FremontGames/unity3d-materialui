@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace MDUI
+namespace MDUI.Component
 {
     public class MDButton : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MDUI
+namespace MDUI.Style
 {
     public class MDTypographyManager : MonoBehaviour
     {

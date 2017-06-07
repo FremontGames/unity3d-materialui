@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace MDUI
+namespace MDUI.Component
 {
     // TODO https://docs.unity3d.com/ScriptReference/Screen-dpi.html
     // TODO fix ratio

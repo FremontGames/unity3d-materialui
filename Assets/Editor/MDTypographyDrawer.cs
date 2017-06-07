@@ -1,8 +1,9 @@
 ﻿#if (UNITY_EDITOR)
 using UnityEngine;
 using UnityEditor;
+using MDUI.Style;
 
-namespace MDUI
+namespace MDUI.Editor
 {
     // https://docs.unity3d.com/Manual/editor-PropertyDrawers.html
 
