@@ -3,10 +3,19 @@ using UnityEngine.UI;
 
 namespace MDUI.Component
 {
+    public enum MDButtonType
+    {
+        Flat, Raised, Fab, Icon
+    }
+    public enum MDButtonState
+    {
+        Normal, Primary, Disabled, Warn
+    }
     public class MDButton : MonoBehaviour
     {
         // fields visible in Unity3d inspector
-        // TODO
+        public MDButtonType type = MDButtonType.Flat;
+        public MDButtonState state = MDButtonState.Normal;
 
         // Use this for initialization
         void Start()
@@ -26,9 +35,20 @@ namespace MDUI.Component
             apply(this.GetComponentInChildren<RectTransform>());
         }
 
-        public static void apply(RectTransform comp)
+        public void apply(RectTransform comp)
         {
-            SetSize(comp, new Vector2(260, 80));
+            if(type == MDButtonType.Icon)
+            {
+                SetSize(comp, new Vector2(30, 30));
+            }
+            else if (type == MDButtonType.Fab)
+            {
+                SetSize(comp, new Vector2(80, 80));
+            }
+            else
+            {
+                SetSize(comp, new Vector2(260, 80));
+            }
         }
 
         [System.Obsolete]
@@ -44,4 +64,5 @@ namespace MDUI.Component
                 sizeDiff.y * (1.0f - trans.pivot.y));
         }
     }
+
 }

@@ -31,7 +31,7 @@ namespace MDUI.Component
 
         public static void apply(RectTransform comp)
         {
-            // SetSize(comp, new Vector2(260, 100));
+            SetSize(comp, new Vector2(260, 100));
         }
 
         [System.Obsolete]

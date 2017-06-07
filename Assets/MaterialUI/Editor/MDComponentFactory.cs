@@ -74,30 +74,43 @@ namespace MDUI.Editor
 
         }
 
-        public static void Setup_Flat(MenuCommand menuCommand)
-        {
-            // TODO
-        }
 
-        public static void Setup_Raised(MenuCommand menuCommand)
+        public static void Setup_Button(MenuCommand menuCommand, MDButtonType type)
         {
             GameObject parent = getParent(menuCommand);
             string name = checkName(parent, "Button");
 
             GameObject go = new GameObject(name);
-            Image img = go.AddComponent<Image>();
-            init(img, "button_bkg");
             go.AddComponent<Button>();
-            go.AddComponent<MDButton>();
 
-            GameObject go2 = new GameObject("Text");
-            Text text = go2.AddComponent<Text>();
-            text.text = "Button";
-            text.alignment = TextAnchor.MiddleCenter;
+            MDButton md = go.AddComponent<MDButton>();
+            md.type = type;
 
-            go2.AddComponent<MDText>();
+            if (type == MDButtonType.Raised)
+            {
+                Image img = go.AddComponent<Image>();
+                init(img, "Sprites/button_raised_bkg");
 
-            go2.transform.SetParent(go.transform);
+                // TODO STATE
+                // http://answers.unity3d.com/questions/1121691/how-to-modify-images-coloralpha.html
+                img.color = new Color(0.5f, 0.5f, 0.5f, 1f); // Set to opaque gray
+
+            }
+            else if (type == MDButtonType.Fab)
+            {
+                Image img = go.AddComponent<Image>();
+                init(img, "Sprites/button_fab_bkg");
+            }
+
+            if (type == MDButtonType.Flat || type == MDButtonType.Raised)
+            {
+                GameObject go2 = new GameObject("Text");
+                Text text = go2.AddComponent<Text>();
+                text.text = "Button";
+                text.alignment = TextAnchor.MiddleCenter;
+                go2.AddComponent<MDText>();
+                go2.transform.SetParent(go.transform);
+            }
 
             GameObjectUtility.SetParentAndAlign(go, parent);
             Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
