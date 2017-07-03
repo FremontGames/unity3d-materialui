@@ -4,18 +4,25 @@ namespace MDUI.Style
 {
     public class MDTypographyManager : MonoBehaviour
     {
-
         // fields visible in Unity3d inspector
         public Font font;
+        public MDTypography subhead;
+        public MDTypography title;
+        public MDTypography headline;
+        public MDTypography caption;
+        public MDTypography button;
+        public MDTypography body1;
+        public MDTypography body2;
 
-        public MDTypography subhead = new MDTypography(16, FontStyle.Normal);
-        public MDTypography title = new MDTypography(20, FontStyle.Bold);
-        public MDTypography headline = new MDTypography(24, FontStyle.Normal);
-
-        public MDTypography caption = new MDTypography(12, FontStyle.Normal);
-        public MDTypography button = new MDTypography(14, FontStyle.Bold);
-        public MDTypography body1 = new MDTypography(14, FontStyle.Normal);
-        public MDTypography body2 = new MDTypography(14, FontStyle.Bold);
+		MDTypographyManager() {
+			subhead = new MDTypography(16, FontStyle.Normal);
+			title = new MDTypography(20, FontStyle.Bold);
+			headline = new MDTypography(24, FontStyle.Normal);
+			caption = new MDTypography(12, FontStyle.Normal);
+			button = new MDTypography(14, FontStyle.Bold);
+			body1 = new MDTypography(14, FontStyle.Normal);
+			body2 = new MDTypography(14, FontStyle.Bold);
+		}
 
         // Use this for initialization
         void Start()
@@ -39,7 +46,6 @@ namespace MDUI.Style
             }
             return singleton;
         }
-
     }
 }
 

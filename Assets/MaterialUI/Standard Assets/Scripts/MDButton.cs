@@ -12,7 +12,13 @@ namespace MDUI.Component
         Normal, Primary, Disabled, Warn
     }
     public class MDButton : MonoBehaviour
-    {
+	{   
+		void Awake()
+		{
+			Debug.Log ("Awake");
+			apply(this.GetComponentInChildren<RectTransform>());
+		}
+
         // fields visible in Unity3d inspector
         public MDButtonType type = MDButtonType.Flat;
         public MDButtonState state = MDButtonState.Normal;
@@ -20,20 +26,21 @@ namespace MDUI.Component
         // Use this for initialization
         void Start()
         {
+			Debug.Log ("Start");
             apply(this.GetComponentInChildren<RectTransform>());
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
+			
         // Use this for editor reset component button
         void Reset()
         {
-            apply(this.GetComponentInChildren<RectTransform>());
+			Debug.Log ("Reset");
+			apply(this.GetComponentInChildren<RectTransform>());
         }
+		void OnValidate()
+		{
+			Debug.Log("Editor causes this OnValidate");
+			apply(this.GetComponentInChildren<RectTransform>());
+		}
 
         public void apply(RectTransform comp)
         {

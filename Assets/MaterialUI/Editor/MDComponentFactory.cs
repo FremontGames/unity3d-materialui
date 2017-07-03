@@ -5,11 +5,29 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 using MDUI.Component;
+using System;
 
 namespace MDUI.Editor
 {
     public class MDComponentFactory
     {
+		public static void Create<T>(MenuCommand menuCommand, string name) where T:MDComponent
+		{
+			GameObject par = getParent(menuCommand);
+			GameObject obj = create<T>(name, par);
+			GameObjectUtility.SetParentAndAlign(obj, par);
+			Undo.RegisterCreatedObjectUndo(obj, "Create " + obj.name);
+			Selection.activeObject = obj;
+		}
+
+		static GameObject create <T> (string defaultName, GameObject parent) where T:MDComponent{
+			string name = checkName(parent, defaultName);
+			GameObject obj = new GameObject(name);
+			MDComponent cmp = obj.AddComponent<T>();
+			cmp.init ();
+			cmp.apply ();
+			return obj;
+		}
 
         static string checkName(GameObject parent, string name)
         {
@@ -57,23 +75,6 @@ namespace MDUI.Editor
             }
             return parent;
         }
-
-        public static void Setup_Text(MenuCommand menuCommand)
-        {
-            GameObject parent = getParent(menuCommand);
-            string name = checkName(parent, "Text");
-
-            GameObject go = new GameObject(name);
-            Text text = go.AddComponent<Text>();
-            text.text = "New Text";
-            go.AddComponent<MDText>();
-
-            GameObjectUtility.SetParentAndAlign(go, parent);
-            Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
-            Selection.activeObject = go;
-
-        }
-
 
         public static void Setup_Button(MenuCommand menuCommand, MDButtonType type)
         {
