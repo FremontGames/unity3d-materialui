@@ -3,98 +3,113 @@ using UnityEngine.UI;
 
 namespace MDUI.Component
 {
-    public enum MDButtonType
-    {
-        Flat, Raised, Fab, Icon
-    }
-    public enum MDButtonState
-    {
-        Normal, Primary, Disabled, Warn
-    }
+	public enum MDButtonType
+	{
+		Flat,
+		Raised,
+		Fab,
+		Icon
+	}
+
+	public enum MDButtonState
+	{
+		Normal,
+		Primary,
+		Disabled,
+		Warn
+	}
+
 	public class MDButton : MDComponent
-	{   
-        public MDButtonType type = MDButtonType.Flat;
-        public MDButtonState state = MDButtonState.Normal;
+	{
+		public MDButtonType type;
+		public MDButtonState state;
 
-		public override void init() 
+		void OnValidate ()
 		{
-			if (type == MDButtonType.Raised)
-			{
-				Image img = gameObject.AddComponent<Image>();
-				init(img, "Sprites/button_raised_bkg");
-				// TODO STATE
-				// http://answers.unity3d.com/questions/1121691/how-to-modify-images-coloralpha.html
-				img.color = new Color(0.5f, 0.5f, 0.5f, 1f); // Set to opaque gray
+			SetSize ();
+			SetBackground ();
+			if (editorUpdateChilds)
+				UpdateChilds ();
+		}
+
+		private void SetSize ()
+		{
+			RectTransform comp = gameObject.GetComponent<RectTransform> ();
+			if (null == comp) {
+				comp = gameObject.AddComponent<RectTransform> ();
 			}
-			else if (type == MDButtonType.Fab)
-			{
-				Image img = gameObject.AddComponent<Image>();
-				init(img, "Sprites/button_fab_bkg");
+			if (type == MDButtonType.Icon) {
+				MDComponentUtils.SetSize (comp, new Vector2 (30, 30));
+			} else if (type == MDButtonType.Fab) {
+				MDComponentUtils.SetSize (comp, new Vector2 (80, 80));
+			} else {
+				MDComponentUtils.SetSize (comp, new Vector2 (260, 80));
+			}		
+		}
+
+		private void SetBackground ()
+		{
+			Image img = gameObject.GetComponent<Image> ();
+			if (null == img) {
+				img = gameObject.AddComponent<Image> ();
 			}
-			if (type == MDButtonType.Flat || type == MDButtonType.Raised)
-			{
-				GameObject obj = new GameObject("Text");
-				Text txt = obj.AddComponent<Text>();
-				txt.text = "Button";
-				txt.alignment = TextAnchor.MiddleCenter;
-				obj.AddComponent<MDText>();
-				obj.transform.SetParent(gameObject.transform);
+			// type
+			if (type == MDButtonType.Flat) {
+				img.enabled = false;
+			} else if (type == MDButtonType.Raised) {
+				img.enabled = true;
+				MDComponentUtils.init (img, "Sprites/button_raised_bkg");
+			} else if (type == MDButtonType.Fab) {
+				img.enabled = true;
+				MDComponentUtils.init (img, "Sprites/button_fab_bkg");
+			}
+			// style
+			if (state == MDButtonState.Normal) {
+				img.color = new Color (0.95f, 0.95f, 0.95f, 1f);
+			} else if (state == MDButtonState.Primary) {
+				img.color = new Color (0.2f, 0.5f, 0.9f, 1f);
+			} else if (state == MDButtonState.Disabled) {
+				img.color = new Color (0.8f, 0.8f, 0.8f, 1f);
+			} else if (state == MDButtonState.Warn) {
+				img.color = new Color (1.0f, 0.3f, 0.1f, 1f);
+			}
+			
+		}
+
+		public override void Create ()
+		{	
+			CreateChilds ();
+			OnValidate ();
+		}
+
+		private void UpdateChilds ()
+		{
+			Text txt = gameObject.GetComponentInChildren<Text> ();
+			// style
+			if (state == MDButtonState.Normal) {
+				txt.color = new Color (0.1f, 0.1f, 0.1f, 1f);
+			} else if (state == MDButtonState.Primary) {
+				txt.color = new Color (1.0f, 1.0f, 1.0f, 1f);
+			} else if (state == MDButtonState.Disabled) {
+				txt.color = new Color (0.5f, 0.5f, 0.5f, 1f);
+			} else if (state == MDButtonState.Warn) {
+				txt.color = new Color (1.0f, 1.0f, 1.0f, 1f);
 			}
 		}
 
-		public override void apply ()
+		private void CreateChilds ()
 		{
-			RectTransform comp = this.GetComponentInChildren<RectTransform> ();
-			if(type == MDButtonType.Icon)
-			{
-				SetSize(comp, new Vector2(30, 30));
-			}
-			else if (type == MDButtonType.Fab)
-			{
-				SetSize(comp, new Vector2(80, 80));
-			}
-			else
-			{
-				SetSize(comp, new Vector2(260, 80));
+			if (type == MDButtonType.Flat || type == MDButtonType.Raised) {
+				GameObject obj = MDComponent.Create<MDText> ("Text", (MDText comp) => {
+				});
+				// txt.alignment = TextAnchor.MiddleCenter;
+				obj.transform.SetParent (gameObject.transform);
+
+				RectTransform xx = obj.GetComponent<RectTransform> ();
+				MDComponentUtils.SetSize (xx, new Vector2 (260, 80));
+
 			}
 		}
-
-        [System.Obsolete]
-        static void SetSize(RectTransform trans, Vector2 size)
-        {
-            Vector2 currSize = trans.rect.size;
-            Vector2 sizeDiff = size - currSize;
-            trans.offsetMin = trans.offsetMin -
-            new Vector2(sizeDiff.x * trans.pivot.x,
-                sizeDiff.y * trans.pivot.y);
-            trans.offsetMax = trans.offsetMax +
-            new Vector2(sizeDiff.x * (1.0f - trans.pivot.x),
-                sizeDiff.y * (1.0f - trans.pivot.y));
-        }
-
-		[System.Obsolete]
-		static void init(Image image, string resource)
-		{
-			Texture2D tex = Resources.Load<Texture2D>(resource);
-
-			// IF scliced
-			// http://docs.unity3d.com/ScriptReference/Sprite.Create.html
-			float pixelsPerUnit = 100.0f;
-			uint extrude = 0;
-			SpriteMeshType meshType = SpriteMeshType.Tight;
-			// http://docs.unity3d.com/450/Documentation/ScriptReference/Sprite-border.html
-			// Vector4 border = Vector4.zero;
-			// http://docs.unity3d.com/ScriptReference/Vector4.html
-			Vector4 border = new Vector4(10, 10, 10, 10);
-			image.type = Image.Type.Sliced;
-
-			// ELSE
-			// image.type = Image.Type.Simple;
-
-			image.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height),
-				new Vector2(0.5f, 0.5f), pixelsPerUnit, extrude, meshType,
-				border);
-		}
-    }
+	}
 
 }

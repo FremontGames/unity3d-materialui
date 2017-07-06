@@ -14,8 +14,7 @@ public class Startup
 	[MenuItem ("GameObject/UI-MD/Text", false, 1)]
 	static void CreateCustomGameObject_Text (MenuCommand menuCommand)
 	{
-		MDComponentFactory.Create<MDText> (menuCommand, "Text", (MDText comp) => {
-		});
+		MDComponentFactory.Create<MDText> (menuCommand, "Text", (MDText comp) => {		});
 	}
 
 	[MenuItem ("GameObject/UI-MD/Button/Flat", false, 2)]

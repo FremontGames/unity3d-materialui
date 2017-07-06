@@ -13,13 +13,9 @@ namespace MDUI.Editor
     {
 		public static GameObject Create<T> (MenuCommand menuCommand, string defaultName, Action<T> vars) where T:MDComponent{
 			GameObject parent = getParent(menuCommand);
-
 			string name = checkNameExists(parent, defaultName);
-			GameObject obj = new GameObject(name);
-			T cmp = obj.AddComponent<T>();
-			vars (cmp);
-			cmp.init ();
-			cmp.apply ();
+
+			GameObject obj = MDComponent.Create<T> (name, vars);
 
 			GameObjectUtility.SetParentAndAlign(obj, parent);
 			Undo.RegisterCreatedObjectUndo(obj, "Create " + obj.name);

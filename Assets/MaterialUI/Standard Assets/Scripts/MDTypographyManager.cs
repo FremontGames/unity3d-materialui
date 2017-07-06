@@ -2,7 +2,7 @@
 
 namespace MDUI.Style
 {
-    public class MDTypographyManager : MonoBehaviour
+    public class MDTypographyManager
     {
         // fields visible in Unity3d inspector
         public Font font;

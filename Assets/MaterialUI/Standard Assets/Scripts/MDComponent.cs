@@ -5,34 +5,17 @@ namespace MDUI.Component
 {
 	public abstract class MDComponent : MonoBehaviour
 	{
-		public abstract void init ();
-		public abstract void apply ();
+		public bool editorUpdateChilds = true;
 
-		// RUNTIME: Use this for initialization
-		void Awake()
-		{
-			// init ();
-		}
+		public abstract void Create();
 
-		// RUNTIME: Use after initialization
-		void Start ()
-		{
-			apply ();
+		public static GameObject Create<T> (string name, Action<T> vars) where T:MDComponent{
+			GameObject obj = new GameObject(name);
+			T cmp = obj.AddComponent<T>();
+			vars (cmp);
+			cmp.Create ();
+			return obj;
 		}
-
-		// EDITOR: Use this for editor reset component button
-		void Reset ()
-		{
-			init ();
-			apply ();
-		}
-
-		// EDITOR: Use this for editor update inspector
-		void OnValidate()
-		{
-			apply ();
-		}
-			
 	}
 }
 
