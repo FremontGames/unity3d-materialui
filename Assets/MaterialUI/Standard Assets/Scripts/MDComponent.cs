@@ -11,21 +11,18 @@ namespace MDUI.Component
 		// RUNTIME: Use this for initialization
 		void Awake()
 		{
-			Debug.Log ("Awake");
 			// init ();
 		}
 
 		// RUNTIME: Use after initialization
 		void Start ()
 		{
-			Debug.Log ("Start");
 			apply ();
 		}
 
 		// EDITOR: Use this for editor reset component button
 		void Reset ()
 		{
-			Debug.Log ("Reset");
 			init ();
 			apply ();
 		}
@@ -33,7 +30,6 @@ namespace MDUI.Component
 		// EDITOR: Use this for editor update inspector
 		void OnValidate()
 		{
-			Debug.Log ("OnValidate");
 			apply ();
 		}
 			

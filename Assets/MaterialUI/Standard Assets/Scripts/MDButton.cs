@@ -11,55 +11,56 @@ namespace MDUI.Component
     {
         Normal, Primary, Disabled, Warn
     }
-    public class MDButton : MonoBehaviour
+	public class MDButton : MDComponent
 	{   
-		void Awake()
-		{
-			Debug.Log ("Awake");
-			apply(this.GetComponentInChildren<RectTransform>());
-		}
-
-        // fields visible in Unity3d inspector
         public MDButtonType type = MDButtonType.Flat;
         public MDButtonState state = MDButtonState.Normal;
 
-        // Use this for initialization
-        void Start()
-        {
-			Debug.Log ("Start");
-            apply(this.GetComponentInChildren<RectTransform>());
-        }
-			
-        // Use this for editor reset component button
-        void Reset()
-        {
-			Debug.Log ("Reset");
-			apply(this.GetComponentInChildren<RectTransform>());
-        }
-		void OnValidate()
+		public override void init() 
 		{
-			Debug.Log("Editor causes this OnValidate");
-			apply(this.GetComponentInChildren<RectTransform>());
+			if (type == MDButtonType.Raised)
+			{
+				Image img = gameObject.AddComponent<Image>();
+				init(img, "Sprites/button_raised_bkg");
+				// TODO STATE
+				// http://answers.unity3d.com/questions/1121691/how-to-modify-images-coloralpha.html
+				img.color = new Color(0.5f, 0.5f, 0.5f, 1f); // Set to opaque gray
+			}
+			else if (type == MDButtonType.Fab)
+			{
+				Image img = gameObject.AddComponent<Image>();
+				init(img, "Sprites/button_fab_bkg");
+			}
+			if (type == MDButtonType.Flat || type == MDButtonType.Raised)
+			{
+				GameObject obj = new GameObject("Text");
+				Text txt = obj.AddComponent<Text>();
+				txt.text = "Button";
+				txt.alignment = TextAnchor.MiddleCenter;
+				obj.AddComponent<MDText>();
+				obj.transform.SetParent(gameObject.transform);
+			}
 		}
 
-        public void apply(RectTransform comp)
-        {
-            if(type == MDButtonType.Icon)
-            {
-                SetSize(comp, new Vector2(30, 30));
-            }
-            else if (type == MDButtonType.Fab)
-            {
-                SetSize(comp, new Vector2(80, 80));
-            }
-            else
-            {
-                SetSize(comp, new Vector2(260, 80));
-            }
-        }
+		public override void apply ()
+		{
+			RectTransform comp = this.GetComponentInChildren<RectTransform> ();
+			if(type == MDButtonType.Icon)
+			{
+				SetSize(comp, new Vector2(30, 30));
+			}
+			else if (type == MDButtonType.Fab)
+			{
+				SetSize(comp, new Vector2(80, 80));
+			}
+			else
+			{
+				SetSize(comp, new Vector2(260, 80));
+			}
+		}
 
         [System.Obsolete]
-        public static void SetSize(RectTransform trans, Vector2 size)
+        static void SetSize(RectTransform trans, Vector2 size)
         {
             Vector2 currSize = trans.rect.size;
             Vector2 sizeDiff = size - currSize;
@@ -70,6 +71,30 @@ namespace MDUI.Component
             new Vector2(sizeDiff.x * (1.0f - trans.pivot.x),
                 sizeDiff.y * (1.0f - trans.pivot.y));
         }
+
+		[System.Obsolete]
+		static void init(Image image, string resource)
+		{
+			Texture2D tex = Resources.Load<Texture2D>(resource);
+
+			// IF scliced
+			// http://docs.unity3d.com/ScriptReference/Sprite.Create.html
+			float pixelsPerUnit = 100.0f;
+			uint extrude = 0;
+			SpriteMeshType meshType = SpriteMeshType.Tight;
+			// http://docs.unity3d.com/450/Documentation/ScriptReference/Sprite-border.html
+			// Vector4 border = Vector4.zero;
+			// http://docs.unity3d.com/ScriptReference/Vector4.html
+			Vector4 border = new Vector4(10, 10, 10, 10);
+			image.type = Image.Type.Sliced;
+
+			// ELSE
+			// image.type = Image.Type.Simple;
+
+			image.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height),
+				new Vector2(0.5f, 0.5f), pixelsPerUnit, extrude, meshType,
+				border);
+		}
     }
 
 }
