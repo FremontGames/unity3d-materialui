@@ -1,1 +1,1 @@
-"C:\Program Files\Unity\Editor\Unity.exe" -quit -batchmode  -logFile stdout.log -buildWindowsPlayer "builds\build.exe"
+"C:\Program Files\Unity\Editor\Unity.exe" -quit -batchmode  -logFile stdout.log -buildWindowsPlayer "builds\unity3d-materialui-win_x86.exe"
