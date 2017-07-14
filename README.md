@@ -2,6 +2,8 @@
 
 This is the home for the Damien's Material Design components built on top of Unity3D.
 
+![alt text](screenshots/ScreenShot001.png)
+
 #### Quick links
 [Contributing](CONTRIBUTING.md)
 
