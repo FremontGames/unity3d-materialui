@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
+using MDUI;
 
 namespace MDUI.Style
 {
-    public class MDTypographyManager
+	public class MDTypographyManager : Singleton<MDTypographyManager>
     {
         // fields visible in Unity3d inspector
         public Font font;
-        public MDTypography subhead;
+		public MDTypography subhead = new MDTypography(16, FontStyle.Normal);
         public MDTypography title;
         public MDTypography headline;
         public MDTypography caption;
@@ -14,6 +15,7 @@ namespace MDUI.Style
         public MDTypography body1;
         public MDTypography body2;
 
+		/*
 		MDTypographyManager() {
 			subhead = new MDTypography(16, FontStyle.Normal);
 			title = new MDTypography(20, FontStyle.Bold);
@@ -46,6 +48,7 @@ namespace MDUI.Style
             }
             return singleton;
         }
+        */
     }
 }
 

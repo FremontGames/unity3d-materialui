@@ -4,6 +4,7 @@
 using UnityEditor;
 using MDUI.Editor;
 using MDUI.Component;
+using MDUI.Style;
 
 // http://docs.unity3d.com/Manual/RunningEditorCodeOnLaunch.html
 [InitializeOnLoad]
@@ -14,7 +15,7 @@ public class Startup
 	[MenuItem ("GameObject/UI-MD/Text", false, 1)]
 	static void CreateCustomGameObject_Text (MenuCommand menuCommand)
 	{
-		MDComponentFactory.Create<MDText> (menuCommand, "Text", (MDText comp) => {		});
+		MDComponentFactory.Create<MDText> (menuCommand, "Text", (MDText comp) => {});
 	}
 
 	[MenuItem ("GameObject/UI-MD/Button/Flat", false, 2)]
@@ -58,8 +59,12 @@ public class Startup
 	}
 
 	// TODO add component menu items
-
-
+	/*
+	[MenuItem ("GameObject/UI-MD/Theme", false, 5)]
+	static void CreateCustomGameObject_Theme (MenuCommand menuCommand)
+	{
+		MDComponentFactory.Create<MDTheme> (menuCommand, "Theme", (MDTheme comp) => {});
+	}*/
 }
 
 #endif

@@ -28,52 +28,80 @@ namespace MDUI.Component
 		{
 			SetSize ();
 			SetBackground ();
+			SetColor ();
 			if (editorUpdateChilds)
 				UpdateChilds ();
 		}
 
 		private void SetSize ()
 		{
-			RectTransform comp = gameObject.GetComponent<RectTransform> ();
-			if (null == comp) {
-				comp = gameObject.AddComponent<RectTransform> ();
+			RectTransform cmp = gameObject.GetComponent<RectTransform> ();
+			if (null == cmp) {
+				cmp = gameObject.AddComponent<RectTransform> ();
 			}
 			if (type == MDButtonType.Icon) {
-				MDComponentUtils.SetSize (comp, new Vector2 (30, 30));
+				MDComponentUtils.SetSize (cmp, new Vector2 (30, 30));
 			} else if (type == MDButtonType.Fab) {
-				MDComponentUtils.SetSize (comp, new Vector2 (80, 80));
+				MDComponentUtils.SetSize (cmp, new Vector2 (80, 80));
 			} else {
-				MDComponentUtils.SetSize (comp, new Vector2 (260, 80));
+				MDComponentUtils.SetSize (cmp, new Vector2 (260, 80));
 			}		
 		}
 
 		private void SetBackground ()
 		{
-			Image img = gameObject.GetComponent<Image> ();
-			if (null == img) {
-				img = gameObject.AddComponent<Image> ();
+			Image cmp = gameObject.GetComponent<Image> ();
+			if (null == cmp) {
+				cmp = gameObject.AddComponent<Image> ();
 			}
 			// type
 			if (type == MDButtonType.Flat) {
-				img.enabled = false;
+				cmp.enabled = false;
 			} else if (type == MDButtonType.Raised) {
-				img.enabled = true;
-				MDComponentUtils.init (img, "Sprites/button_raised_bkg");
+				cmp.enabled = true;
+				MDComponentUtils.init (cmp, "Sprites/button_raised_bkg");
 			} else if (type == MDButtonType.Fab) {
-				img.enabled = true;
-				MDComponentUtils.init (img, "Sprites/button_fab_bkg");
+				cmp.enabled = true;
+				MDComponentUtils.init (cmp, "Sprites/button_fab_bkg");
 			}
+			/*
 			// style
 			if (state == MDButtonState.Normal) {
-				img.color = new Color (0.95f, 0.95f, 0.95f, 1f);
+				cmp.color = new Color (0.95f, 0.95f, 0.95f, 1f);
 			} else if (state == MDButtonState.Primary) {
-				img.color = new Color (0.2f, 0.5f, 0.9f, 1f);
+				cmp.color = new Color (0.2f, 0.5f, 0.9f, 1f);
 			} else if (state == MDButtonState.Disabled) {
-				img.color = new Color (0.8f, 0.8f, 0.8f, 1f);
+				cmp.color = new Color (0.8f, 0.8f, 0.8f, 1f);
 			} else if (state == MDButtonState.Warn) {
-				img.color = new Color (1.0f, 0.3f, 0.1f, 1f);
+				cmp.color = new Color (1.0f, 0.3f, 0.1f, 1f);
 			}
-			
+			*/
+		}
+		private void SetColor ()
+		{
+			// http://docs.unity3d.com/Manual/script-Button.html
+			Button cmp = gameObject.GetComponent<Button> ();
+			if (null == cmp) {
+				cmp = gameObject.AddComponent<Button> ();
+			}
+			// http://docs.unity3d.com/Manual/script-SelectableTransition.html
+			cmp.transition = Selectable.Transition.ColorTint;
+			// http://docs.unity3d.com/ScriptReference/Color32.html
+			ColorBlock cb = cmp.colors;
+			if (state == MDButtonState.Normal) {
+				cb.normalColor =      new Color (0.95f, 0.95f, 0.95f, 1f);
+				cb.highlightedColor = cb.normalColor;
+				cb.pressedColor =     new Color (0.7f, 0.7f, 0.7f, 1f);
+			} else if (state == MDButtonState.Primary) {
+				cb.normalColor = new Color (0.2f, 0.5f, 0.9f, 1f);
+			} else if (state == MDButtonState.Disabled) {
+				cb.normalColor = new Color (0.8f, 0.8f, 0.8f, 1f);
+			} else if (state == MDButtonState.Warn) {
+				cb.normalColor = new Color (1.0f, 0.3f, 0.1f, 1f);
+			}
+			cb.colorMultiplier = 1f;
+			cb.fadeDuration = 0.1f;
+			cmp.colors = cb;
 		}
 
 		public override void Create ()
