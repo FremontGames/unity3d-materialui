@@ -1,6 +1,6 @@
 -ABANDONED-
 ============
-This project successfully help us progress but now requires too much personal.
+This project successfully help us progress but now requires too much personal time.
 
 # Material Design for Unity3D
 
